@@ -1,5 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+class Notification extends React.Component {
+	render() {
+		return (
+			<div>Notification</div>
+		);
+	}
+}
+export default Notification;

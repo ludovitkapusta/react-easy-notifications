@@ -1,9 +1,13 @@
 {
   "presets" : [
-  	["es2016"],
-  	"react"
+  	"env",
+    "stage-2",
+    "react"
   ],
   "plugins": [
-    "babel-plugin-transform-class-properties"
+    "transform-export-extensions",
+    "transform-class-properties",
+  	"transform-object-rest-spread",
+    "transform-react-jsx"
   ]
 }
