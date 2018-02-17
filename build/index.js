@@ -64,12 +64,11 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 87);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -259,8 +258,49 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 1:
+"use strict";
+
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+function makeEmptyFunction(arg) {
+  return function () {
+    return arg;
+  };
+}
+
+/**
+ * This function accepts and discards inputs; it has no side effects. This is
+ * primarily useful idiomatically for overridable function endpoints which
+ * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+ */
+var emptyFunction = function emptyFunction() {};
+
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function () {
+  return this;
+};
+emptyFunction.thatReturnsArgument = function (arg) {
+  return arg;
+};
+
+module.exports = emptyFunction;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -320,12 +360,11 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-
-/***/ 106:
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
+/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
  * This source code is licensed under the MIT license found in the
@@ -334,128 +373,127 @@ module.exports = invariant;
 
 
 
-if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(1);
-  var warning = __webpack_require__(2);
-  var ReactPropTypesSecret = __webpack_require__(33);
-  var loggedTypeFailures = {};
-}
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  if (process.env.NODE_ENV !== 'production') {
-    for (var typeSpecName in typeSpecs) {
-      if (typeSpecs.hasOwnProperty(typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-        } catch (ex) {
-          error = ex;
-        }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
+module.exports = ReactPropTypesSecret;
 
-          var stack = getStack ? getStack() : '';
-
-          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
-        }
-      }
-    }
-  }
-}
-
-module.exports = checkPropTypes;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-
-/***/ 107:
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
-var emptyFunction = __webpack_require__(8);
-var invariant = __webpack_require__(1);
-var ReactPropTypesSecret = __webpack_require__(33);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-module.exports = function() {
-  function shim(props, propName, componentName, location, propFullName, secret) {
-    if (secret === ReactPropTypesSecret) {
-      // It is still safe when called from React.
-      return;
-    }
-    invariant(
-      false,
-      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-      'Use PropTypes.checkPropTypes() to call them. ' +
-      'Read more at http://fb.me/use-check-prop-types'
-    );
-  };
-  shim.isRequired = shim;
-  function getShim() {
-    return shim;
-  };
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-  var ReactPropTypes = {
-    array: shim,
-    bool: shim,
-    func: shim,
-    number: shim,
-    object: shim,
-    string: shim,
-    symbol: shim,
+var _react = __webpack_require__(8);
 
-    any: shim,
-    arrayOf: getShim,
-    element: shim,
-    instanceOf: getShim,
-    node: shim,
-    objectOf: getShim,
-    oneOf: getShim,
-    oneOfType: getShim,
-    shape: getShim,
-    exact: getShim
-  };
+var _react2 = _interopRequireDefault(_react);
 
-  ReactPropTypes.checkPropTypes = emptyFunction;
-  ReactPropTypes.PropTypes = ReactPropTypes;
+var _propTypes = __webpack_require__(7);
 
-  return ReactPropTypes;
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _Notification = __webpack_require__(9);
+
+var _Notification2 = _interopRequireDefault(_Notification);
+
+var _notification = __webpack_require__(5);
+
+var _utils = __webpack_require__(13);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NotificationsContainer = function (_React$Component) {
+	_inherits(NotificationsContainer, _React$Component);
+
+	function NotificationsContainer(props) {
+		_classCallCheck(this, NotificationsContainer);
+
+		var _this = _possibleConstructorReturn(this, (NotificationsContainer.__proto__ || Object.getPrototypeOf(NotificationsContainer)).call(this, props));
+
+		_this.state = {
+			items: []
+		};
+
+		setInterval(function () {
+			var items = _notification.notification.getAll();
+			_this.setState({ items: items });
+		}, 100);
+		return _this;
+	}
+
+	_createClass(NotificationsContainer, [{
+		key: 'render',
+		value: function render() {
+			var items = this.state.items;
+			var className = this.props.className;
+
+
+			var containerClasses = _utils.arrays.join('notification-container', className);
+
+			return _react2.default.createElement(
+				'div',
+				{ className: containerClasses },
+				items.map(function (item, index) {
+					return _react2.default.createElement(_Notification2.default, {
+						key: index,
+						title: item.title,
+						duration: item.duration
+					});
+				})
+			);
+		}
+	}]);
+
+	return NotificationsContainer;
+}(_react2.default.Component);
+
+;
+
+NotificationsContainer.propTypes = {
+	items: _propTypes2.default.array
 };
 
+NotificationsContainer.defaultProps = {
+	items: []
+};
+
+exports.default = NotificationsContainer;
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 2:
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.notification = undefined;
+
+var _notification2 = __webpack_require__(11);
+
+var _notification3 = _interopRequireDefault(_notification2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.notification = _notification3.default;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -469,7 +507,7 @@ module.exports = function() {
 
 
 
-var emptyFunction = __webpack_require__(8);
+var emptyFunction = __webpack_require__(1);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -524,28 +562,351 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-
-/***/ 33:
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/**
+/* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
 
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
 
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(17)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(16)();
+}
 
-module.exports = ReactPropTypesSecret;
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports) {
 
-/***/ 4:
+module.exports = require("react");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(7);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Notification = function (_React$Component) {
+    _inherits(Notification, _React$Component);
+
+    function Notification() {
+        _classCallCheck(this, Notification);
+
+        return _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).apply(this, arguments));
+    }
+
+    _createClass(Notification, [{
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                title = _props.title,
+                duration = _props.duration;
+
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'notification' },
+                title,
+                ' ',
+                duration
+            );
+        }
+    }]);
+
+    return Notification;
+}(_react2.default.Component);
+
+exports.default = Notification;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NotificationsContainer = exports.notification = undefined;
+
+var _NotificationsContainer = __webpack_require__(4);
+
+var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
+
+var _notification = __webpack_require__(5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.notification = _notification.notification;
+exports.NotificationsContainer = _NotificationsContainer2.default;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _NotificationsContainer = __webpack_require__(4);
+
+var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var items = [];
+
+exports.default = {
+	create: function create(title, duration) {
+		var notification = {
+			title: title,
+			duration: duration
+		};
+
+		items.push(notification);
+	},
+	getAll: function getAll() {
+		return items;
+	}
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+exports.default = {
+    /**
+     * @method toArray
+     * @description Converts non-array variable to array.
+     * @param {Any} variable
+     * @return {Array}
+     */
+    toArray: function toArray(variable) {
+        return Array.isArray(variable) ? variable : [variable];
+    },
+
+
+    /**
+     * @method includes
+     * @description Checks if provided array includes value/values.
+     * @param {Array} array Source array.
+     * @param {Array|Any} values Any kind of values (string, number, array).
+     * @param {Boolean} strict Comparison strategy. When {true}, should include all values.
+     * @return {Boolean}
+     */
+    includes: function includes(array, values) {
+        var strict = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+        var valuesCollection = Array.isArray(values) ? values : [values];
+        var includes = false;
+
+        /* Use "for" loop to stop iteration once resolved {true} in non-strict mode */
+        for (var i = 0; i < valuesCollection.length; i++) {
+            var expectedValue = valuesCollection[i];
+
+            if (array.includes(expectedValue)) {
+                includes = true;
+
+                if (!strict) {
+                    break;
+                }
+            } else if (strict) {
+                includes = false;
+            }
+        }
+
+        return includes;
+    },
+
+
+    /**
+     * @method fromNodes
+     * @description Converts array-like Object(s) to array.
+     * @param {HTMLCollection|NodeList|DOMElement} nodes
+     * @return {Array} Array of the provided nodes.
+     */
+    fromNodes: function fromNodes(nodes) {
+        if (Array.isArray(nodes)) {
+            return nodes;
+        }
+        return nodes instanceof HTMLCollection || nodes instanceof NodeList ? Array.from(nodes) : [nodes];
+    },
+
+
+    /**
+     * @method merge
+     * @description Shallow merge set of String/Array into Array and unqiue.
+     * @param {Array} arrays
+     * @return {Array}
+     */
+    merge: function merge() {
+        var merged = [];
+
+        for (var _len = arguments.length, arrays = Array(_len), _key = 0; _key < _len; _key++) {
+            arrays[_key] = arguments[_key];
+        }
+
+        arrays.map(function (array) {
+            var _merged;
+
+            !Array.isArray(array) && (array = [array]);
+            (_merged = merged).push.apply(_merged, _toConsumableArray(array));
+        });
+
+        merged = this.trim(merged);
+        merged = this.unique(merged);
+
+        return merged;
+    },
+
+
+    /**
+     * @method join
+     * @description Joins array values using certain delimiter.
+     * @param {Array} arrays
+     * @return {Array}
+     */
+    join: function join() {
+        return this.merge.apply(this, arguments).join(' ');
+    },
+
+
+    /**
+     * @method unique
+     * @description Remove duplicated from the Array entries.
+     * @param {Array} array Source array.
+     * @return {Array} Reference to the modified array.
+     */
+    unique: function unique(array) {
+        return Array.from(new Set(array));
+    },
+
+    /**
+     * @method trim
+     * @description Removes empty values from Array.
+     * @param {Array} array
+     * @return {Array}
+     */
+    trim: function trim(array) {
+        return array.filter(Boolean);
+    },
+
+
+    /* Find and remove item from an array */
+    /**
+     * @method trim
+     * @description Find and remove item from an array.
+     * @param {Array} array Source array.
+     * @param {Any} item Item to remove.
+     * @return {Array}
+     */
+    remove: function remove(array, item) {
+        var i = array.indexOf(item);
+        if (i !== -1) {
+            array.splice(i, 1);
+        }
+
+        return array;
+    },
+
+
+    /**
+     * @method flatten
+     * @description Flattens passed array into one-level array.
+     * @param {Array} array
+     * @return {Array}
+     */
+    flatten: function flatten(array) {
+        if (Array.isArray(array)) {
+            return array.reduce(function (done, current) {
+                return done.concat(current);
+            }, []);
+        }
+
+        return array;
+    }
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.arrays = undefined;
+
+var _arrays2 = __webpack_require__(12);
+
+var _arrays3 = _interopRequireDefault(_arrays2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.arrays = _arrays3.default;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -642,136 +1003,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-
-/***/ 50:
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(50);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(58);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _Notification = __webpack_require__(86);
-
-var _Notification2 = _interopRequireDefault(_Notification);
-
-var _notification = __webpack_require__(52);
-
-var _utils = __webpack_require__(90);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NotificationsContainer = function (_React$Component) {
-	_inherits(NotificationsContainer, _React$Component);
-
-	function NotificationsContainer(props) {
-		_classCallCheck(this, NotificationsContainer);
-
-		var _this = _possibleConstructorReturn(this, (NotificationsContainer.__proto__ || Object.getPrototypeOf(NotificationsContainer)).call(this, props));
-
-		_this.state = {
-			items: []
-		};
-
-		setInterval(function () {
-			var items = _notification.notification.getAll();
-			_this.setState({ items: items });
-		}, 100);
-		return _this;
-	}
-
-	_createClass(NotificationsContainer, [{
-		key: 'render',
-		value: function render() {
-			var items = this.state.items;
-			var className = this.props.className;
-
-
-			var containerClasses = _utils.arrays.join('notification-container', className);
-
-			return _react2.default.createElement(
-				'div',
-				{ className: containerClasses },
-				_react2.default.createElement(
-					'button',
-					{ onClick: this.handleClick },
-					'click'
-				),
-				items.map(function (item, index) {
-					return _react2.default.createElement(_Notification2.default, {
-						key: index,
-						title: item.title,
-						duration: item.duration
-					});
-				})
-			);
-		}
-	}]);
-
-	return NotificationsContainer;
-}(_react2.default.Component);
-
-;
-
-NotificationsContainer.propTypes = {
-	items: _propTypes2.default.array
-};
-
-NotificationsContainer.defaultProps = {
-	items: []
-};
-
-exports.default = NotificationsContainer;
-
-/***/ }),
-
-/***/ 52:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.notification = undefined;
-
-var _notification2 = __webpack_require__(88);
-
-var _notification3 = _interopRequireDefault(_notification2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.notification = _notification3.default;
-
-/***/ }),
-
-/***/ 57:
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -784,13 +1016,145 @@ exports.notification = _notification3.default;
 
 
 
-var emptyFunction = __webpack_require__(8);
-var invariant = __webpack_require__(1);
-var warning = __webpack_require__(2);
-var assign = __webpack_require__(4);
+if (process.env.NODE_ENV !== 'production') {
+  var invariant = __webpack_require__(2);
+  var warning = __webpack_require__(6);
+  var ReactPropTypesSecret = __webpack_require__(3);
+  var loggedTypeFailures = {};
+}
 
-var ReactPropTypesSecret = __webpack_require__(33);
-var checkPropTypes = __webpack_require__(106);
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (process.env.NODE_ENV !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+module.exports = checkPropTypes;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var emptyFunction = __webpack_require__(1);
+var invariant = __webpack_require__(2);
+var ReactPropTypesSecret = __webpack_require__(3);
+
+module.exports = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    invariant(
+      false,
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+  };
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim
+  };
+
+  ReactPropTypes.checkPropTypes = emptyFunction;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var emptyFunction = __webpack_require__(1);
+var invariant = __webpack_require__(2);
+var warning = __webpack_require__(6);
+var assign = __webpack_require__(14);
+
+var ReactPropTypesSecret = __webpack_require__(3);
+var checkPropTypes = __webpack_require__(15);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -1320,393 +1684,5 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
-/***/ }),
-
-/***/ 58:
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(57)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(107)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 8:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
-
-/***/ }),
-
-/***/ 86:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(50);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(58);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Notification = function (_React$Component) {
-    _inherits(Notification, _React$Component);
-
-    function Notification() {
-        _classCallCheck(this, Notification);
-
-        return _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).apply(this, arguments));
-    }
-
-    _createClass(Notification, [{
-        key: 'render',
-        value: function render() {
-            var _props = this.props,
-                title = _props.title,
-                duration = _props.duration;
-
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'notification' },
-                title,
-                _react2.default.createElement('br', null),
-                duration
-            );
-        }
-    }]);
-
-    return Notification;
-}(_react2.default.Component);
-
-exports.default = Notification;
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotificationsContainer = exports.notification = undefined;
-
-var _NotificationsContainer = __webpack_require__(51);
-
-var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
-
-var _notification = __webpack_require__(52);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.notification = _notification.notification;
-exports.NotificationsContainer = _NotificationsContainer2.default;
-
-/***/ }),
-
-/***/ 88:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _NotificationsContainer = __webpack_require__(51);
-
-var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var items = [];
-
-exports.default = {
-	create: function create(title, duration) {
-		var notification = {
-			title: title,
-			duration: duration
-		};
-
-		items.push(notification);
-	},
-	getAll: function getAll() {
-		return items;
-	}
-};
-
-/***/ }),
-
-/***/ 89:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-exports.default = {
-    /**
-     * @method toArray
-     * @description Converts non-array variable to array.
-     * @param {Any} variable
-     * @return {Array}
-     */
-    toArray: function toArray(variable) {
-        return Array.isArray(variable) ? variable : [variable];
-    },
-
-
-    /**
-     * @method includes
-     * @description Checks if provided array includes value/values.
-     * @param {Array} array Source array.
-     * @param {Array|Any} values Any kind of values (string, number, array).
-     * @param {Boolean} strict Comparison strategy. When {true}, should include all values.
-     * @return {Boolean}
-     */
-    includes: function includes(array, values) {
-        var strict = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-        var valuesCollection = Array.isArray(values) ? values : [values];
-        var includes = false;
-
-        /* Use "for" loop to stop iteration once resolved {true} in non-strict mode */
-        for (var i = 0; i < valuesCollection.length; i++) {
-            var expectedValue = valuesCollection[i];
-
-            if (array.includes(expectedValue)) {
-                includes = true;
-
-                if (!strict) {
-                    break;
-                }
-            } else if (strict) {
-                includes = false;
-            }
-        }
-
-        return includes;
-    },
-
-
-    /**
-     * @method fromNodes
-     * @description Converts array-like Object(s) to array.
-     * @param {HTMLCollection|NodeList|DOMElement} nodes
-     * @return {Array} Array of the provided nodes.
-     */
-    fromNodes: function fromNodes(nodes) {
-        if (Array.isArray(nodes)) {
-            return nodes;
-        }
-        return nodes instanceof HTMLCollection || nodes instanceof NodeList ? Array.from(nodes) : [nodes];
-    },
-
-
-    /**
-     * @method merge
-     * @description Shallow merge set of String/Array into Array and unqiue.
-     * @param {Array} arrays
-     * @return {Array}
-     */
-    merge: function merge() {
-        var merged = [];
-
-        for (var _len = arguments.length, arrays = Array(_len), _key = 0; _key < _len; _key++) {
-            arrays[_key] = arguments[_key];
-        }
-
-        arrays.map(function (array) {
-            var _merged;
-
-            !Array.isArray(array) && (array = [array]);
-            (_merged = merged).push.apply(_merged, _toConsumableArray(array));
-        });
-
-        merged = this.trim(merged);
-        merged = this.unique(merged);
-
-        return merged;
-    },
-
-
-    /**
-     * @method join
-     * @description Joins array values using certain delimiter.
-     * @param {Array} arrays
-     * @return {Array}
-     */
-    join: function join() {
-        return this.merge.apply(this, arguments).join(' ');
-    },
-
-
-    /**
-     * @method unique
-     * @description Remove duplicated from the Array entries.
-     * @param {Array} array Source array.
-     * @return {Array} Reference to the modified array.
-     */
-    unique: function unique(array) {
-        return Array.from(new Set(array));
-    },
-
-    /**
-     * @method trim
-     * @description Removes empty values from Array.
-     * @param {Array} array
-     * @return {Array}
-     */
-    trim: function trim(array) {
-        return array.filter(Boolean);
-    },
-
-
-    /* Find and remove item from an array */
-    /**
-     * @method trim
-     * @description Find and remove item from an array.
-     * @param {Array} array Source array.
-     * @param {Any} item Item to remove.
-     * @return {Array}
-     */
-    remove: function remove(array, item) {
-        var i = array.indexOf(item);
-        if (i !== -1) {
-            array.splice(i, 1);
-        }
-
-        return array;
-    },
-
-
-    /**
-     * @method flatten
-     * @description Flattens passed array into one-level array.
-     * @param {Array} array
-     * @return {Array}
-     */
-    flatten: function flatten(array) {
-        if (Array.isArray(array)) {
-            return array.reduce(function (done, current) {
-                return done.concat(current);
-            }, []);
-        }
-
-        return array;
-    }
-};
-
-/***/ }),
-
-/***/ 90:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.arrays = undefined;
-
-var _arrays2 = __webpack_require__(89);
-
-var _arrays3 = _interopRequireDefault(_arrays2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.arrays = _arrays3.default;
-
 /***/ })
-
-/******/ });
+/******/ ]);
