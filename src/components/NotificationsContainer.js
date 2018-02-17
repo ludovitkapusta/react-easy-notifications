@@ -28,7 +28,6 @@ class NotificationsContainer extends React.Component {
 		
 		return (
 			<div className={ containerClasses }>
-				<button onClick={ this.handleClick } >click</button>
 				{ items.map((item, index) => {
 					return <Notification 
 						key={ index }
