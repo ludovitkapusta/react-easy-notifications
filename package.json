@@ -1,7 +1,7 @@
 {
-  "name": "react-advanced-notifications",
+  "name": "react-easy-notifications",
   "version": "0.0.1",
-  "description": "React advanced notifications",
+  "description": "Simple module for creating a notifications using React",
   "main": "build/index.js",
   "peerDependencies": {
     "react": "^15.5.4"
