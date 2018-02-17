@@ -1,10 +1,4 @@
-import React from 'react';
+import NotificationsContainer from './components/NotificationsContainer';
+import { notification } from './notification';
 
-class Notification extends React.Component {
-	render() {
-		return (
-			<div>Notification</div>
-		);
-	}
-}
-export default Notification;
+export { notification, NotificationsContainer };
