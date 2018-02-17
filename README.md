@@ -11,8 +11,8 @@ Import NotificationsContainer and notification in your component class. As idea 
 import { NotificationsContainer, notification } from 'react-easy-notifications';
 ```
 
-##Example
-````
+## Example
+```
 import React, { Component } from 'react';
 import { NotificationsContainer, notification } from 'react-easy-notifications';
 
