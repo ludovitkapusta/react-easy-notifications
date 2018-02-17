@@ -7,9 +7,7 @@ class Notification extends React.Component {
 
 		return (
             <div className="notification">
-                { title }
-                <br/>
-                { duration }
+                { title } { duration }
             </div>
         )
 	};
