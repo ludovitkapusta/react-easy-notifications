@@ -41,11 +41,7 @@ class NotificationsContainer extends React.Component {
 };
 
 NotificationsContainer.propTypes = {
-	items: PropTypes.array
-};
-
-NotificationsContainer.defaultProps = {
-    items: []
+	className: PropTypes.string
 };
 
 export default NotificationsContainer;

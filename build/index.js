@@ -463,11 +463,7 @@ var NotificationsContainer = function (_React$Component) {
 ;
 
 NotificationsContainer.propTypes = {
-	items: _propTypes2.default.array
-};
-
-NotificationsContainer.defaultProps = {
-	items: []
+	className: _propTypes2.default.string
 };
 
 exports.default = NotificationsContainer;
