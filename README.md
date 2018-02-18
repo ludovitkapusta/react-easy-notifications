@@ -6,9 +6,9 @@ Install **React easy notifications** by using npm command
 future command npm install react-easy-notifications
 ```
 
-Import NotificationsContainer and notification in your component class. 
+Import `NotificationsContainer` and `notificationHandler` in your component class.
 ```
-import { NotificationsContainer, notification } from 'react-easy-notifications';
+import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
 ```
 
 ## Example
@@ -20,7 +20,13 @@ class App extends Component {
 
 	createSuccessNotification = (event) => {
 		event.preventDefault();
-		notification.create('success', 3000);
+		notificationHandler.create({
+			title: 'Success!',
+			content: 'Your action was successfull',
+			duration: 3000,
+			onCreate: () => this.onCreate(),
+			onClose: () => this.onClose()
+		});
 	}
 
 	render() {
