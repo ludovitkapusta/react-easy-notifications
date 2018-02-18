@@ -1,5 +1,5 @@
 # React easy notifications
-React module for creating a notifications using React
+React module for creating a notifications
 ## Instalation
 Install **React easy notifications** by using npm command
 ```
@@ -42,4 +42,4 @@ class App extends Component {
 export default App;
 ```
 
-As idea behind **React easy notifications** was to create notifications, that can be called from any part of code, put <NotificationsContainer /> into some header part of your application.
+As idea behind **React easy notifications** was to create notifications, that can be called from any part of code as simply as possible, it is adviced to put <NotificationsContainer /> into some header part of your application.
