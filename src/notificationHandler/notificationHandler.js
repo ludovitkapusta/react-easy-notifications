@@ -1,14 +1,18 @@
 import { EventEmitter } from 'events';
-class notification extends EventEmitter {
+
+class notificationHandler extends EventEmitter {
 	constructor() {
 		super();
 		this.items = [];
 	}
 
-    create(title, duration) {
+    create({ title, content, duration, onCreate, onClose }) {
 		const notification = {
 			title,
-			duration
+			content,
+			duration,
+			onCreate,
+			onClose
 		}
 
 		this.items.push(notification);
@@ -28,4 +32,4 @@ class notification extends EventEmitter {
 	}
 }
 
-export default new notification();
+export default new notificationHandler();

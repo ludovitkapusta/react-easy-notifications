@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
-import { notification } from '../notification';
+import { notificationHandler } from '../notificationHandler';
 import { arrays } from '../utils';
 
 class NotificationsContainer extends React.Component {
@@ -13,14 +13,14 @@ class NotificationsContainer extends React.Component {
 	}
 
 	componentWillMount = () => {
-		notification.addChangeListener(this.handleStoreChange);
+		notificationHandler.addChangeListener(this.handleEventChange);
 	};
 	
 	componentWillUnmount = () => {
-		notification.removeChangeListener(this.handleStoreChange);
+		notificationHandler.removeChangeListener(this.handleEventChange);
 	};
 
-	handleStoreChange = (items) => {
+	handleEventChange = (items) => {
 		this.setState({ items });
 	};
 
@@ -39,7 +39,10 @@ class NotificationsContainer extends React.Component {
 					return <Notification 
 						key={ index }
 						title={ item.title }
+						content={ item.content }
 						duration={ item.duration }
+						onCreate={ item.onCreate }
+						onClose={ item.onClose }
 					/>
 				}) }
 			</div>

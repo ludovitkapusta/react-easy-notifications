@@ -513,7 +513,7 @@ var _Notification = __webpack_require__(9);
 
 var _Notification2 = _interopRequireDefault(_Notification);
 
-var _notification = __webpack_require__(8);
+var _notificationHandler = __webpack_require__(20);
 
 var _utils = __webpack_require__(14);
 
@@ -534,14 +534,14 @@ var NotificationsContainer = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (NotificationsContainer.__proto__ || Object.getPrototypeOf(NotificationsContainer)).call(this, props));
 
 		_this.componentWillMount = function () {
-			_notification.notification.addChangeListener(_this.handleStoreChange);
+			_notificationHandler.notificationHandler.addChangeListener(_this.handleEventChange);
 		};
 
 		_this.componentWillUnmount = function () {
-			_notification.notification.removeChangeListener(_this.handleStoreChange);
+			_notificationHandler.notificationHandler.removeChangeListener(_this.handleEventChange);
 		};
 
-		_this.handleStoreChange = function (items) {
+		_this.handleEventChange = function (items) {
 			_this.setState({ items: items });
 		};
 
@@ -567,7 +567,10 @@ var NotificationsContainer = function (_React$Component) {
 					return _react2.default.createElement(_Notification2.default, {
 						key: index,
 						title: item.title,
-						duration: item.duration
+						content: item.content,
+						duration: item.duration,
+						onCreate: item.onCreate,
+						onClose: item.onClose
 					});
 				})
 			);
@@ -586,26 +589,7 @@ NotificationsContainer.propTypes = {
 exports.default = NotificationsContainer;
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.notification = undefined;
-
-var _notification2 = __webpack_require__(12);
-
-var _notification3 = _interopRequireDefault(_notification2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.notification = _notification3.default;
-
-/***/ }),
+/* 8 */,
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -644,19 +628,41 @@ var Notification = function (_React$Component) {
     }
 
     _createClass(Notification, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var onCreate = this.props.onCreate;
+
+            if (onCreate) this.props.onCreate();
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _props = this.props,
                 title = _props.title,
-                duration = _props.duration;
+                content = _props.content,
+                duration = _props.duration,
+                onCreate = _props.onCreate,
+                onClose = _props.onClose;
 
 
             return _react2.default.createElement(
                 'div',
-                { className: 'notification' },
-                title,
-                ' ',
-                duration
+                { className: 'notification', 'data-duration': '{ duration }' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'notification--header' },
+                    title
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'notification--content' },
+                    content
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: onClose },
+                    'close'
+                )
             );
         }
     }]);
@@ -677,86 +683,21 @@ exports.default = Notification;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotificationsContainer = exports.notification = undefined;
+exports.NotificationsContainer = exports.notificationHandler = undefined;
 
 var _NotificationsContainer = __webpack_require__(7);
 
 var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
 
-var _notification = __webpack_require__(8);
+var _notificationHandler = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.notification = _notification.notification;
+exports.notificationHandler = _notificationHandler.notificationHandler;
 exports.NotificationsContainer = _NotificationsContainer2.default;
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _events = __webpack_require__(15);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var notification = function (_EventEmitter) {
-	_inherits(notification, _EventEmitter);
-
-	function notification() {
-		_classCallCheck(this, notification);
-
-		var _this = _possibleConstructorReturn(this, (notification.__proto__ || Object.getPrototypeOf(notification)).call(this));
-
-		_this.items = [];
-		return _this;
-	}
-
-	_createClass(notification, [{
-		key: 'create',
-		value: function create(title, duration) {
-			var notification = {
-				title: title,
-				duration: duration
-			};
-
-			this.items.push(notification);
-			this.emit('create', this.items);
-		}
-	}, {
-		key: 'addChangeListener',
-		value: function addChangeListener(callback) {
-			this.addListener('create', callback);
-		}
-	}, {
-		key: 'removeChangeListener',
-		value: function removeChangeListener(callback) {
-			this.removeListener('create', callback);
-		}
-	}, {
-		key: 'getAll',
-		value: function getAll() {
-			return items;
-		}
-	}]);
-
-	return notification;
-}(_events.EventEmitter);
-
-exports.default = new notification();
-
-/***/ }),
+/* 12 */,
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2028,6 +1969,101 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 };
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.notificationHandler = undefined;
+
+var _notificationHandler2 = __webpack_require__(21);
+
+var _notificationHandler3 = _interopRequireDefault(_notificationHandler2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.notificationHandler = _notificationHandler3.default;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _events = __webpack_require__(15);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var notificationHandler = function (_EventEmitter) {
+	_inherits(notificationHandler, _EventEmitter);
+
+	function notificationHandler() {
+		_classCallCheck(this, notificationHandler);
+
+		var _this = _possibleConstructorReturn(this, (notificationHandler.__proto__ || Object.getPrototypeOf(notificationHandler)).call(this));
+
+		_this.items = [];
+		return _this;
+	}
+
+	_createClass(notificationHandler, [{
+		key: 'create',
+		value: function create(_ref) {
+			var title = _ref.title,
+			    content = _ref.content,
+			    duration = _ref.duration,
+			    onCreate = _ref.onCreate,
+			    onClose = _ref.onClose;
+
+			var notification = {
+				title: title,
+				content: content,
+				duration: duration,
+				onCreate: onCreate,
+				onClose: onClose
+			};
+
+			this.items.push(notification);
+			this.emit('create', this.items);
+		}
+	}, {
+		key: 'addChangeListener',
+		value: function addChangeListener(callback) {
+			this.addListener('create', callback);
+		}
+	}, {
+		key: 'removeChangeListener',
+		value: function removeChangeListener(callback) {
+			this.removeListener('create', callback);
+		}
+	}, {
+		key: 'getAll',
+		value: function getAll() {
+			return items;
+		}
+	}]);
+
+	return notificationHandler;
+}(_events.EventEmitter);
+
+exports.default = new notificationHandler();
 
 /***/ })
 /******/ ]);
