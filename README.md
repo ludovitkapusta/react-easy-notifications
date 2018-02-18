@@ -23,7 +23,7 @@ notificationHandler.create({
   onClose: () => this.onClose()
 });
 ```
-Exmplae on implementaion
+Example on implementaion
 ```jsx
 import React, { Component } from 'react';
 import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
@@ -54,4 +54,4 @@ class App extends Component {
 export default App;
 ```
 
-As idea behind **React easy notifications** was to create notifications, that can be called from any part of code as simply as possible, it is adviced to put <NotificationsContainer /> into some header part of your application.
+As idea behind **React easy notifications** was to create notifications, that can be called from any part of code as simply as possible, it is adviced to put `<NotificationsContainer />` into some header part of your application.
