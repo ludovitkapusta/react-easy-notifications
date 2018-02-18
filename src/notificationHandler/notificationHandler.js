@@ -16,19 +16,25 @@ class notificationHandler extends EventEmitter {
 		}
 
 		this.items.push(notification);
-		this.emit('create', this.items);
+		this.emit('change', this.items);
 	};
 
+	destroy(item) {
+		let newItems = this.items;
+		const index = newItems.indexOf(item);
+		if(index > -1) {
+			newItems.splice(index, 1);
+			this.items = newItems;
+			this.emit('change', this.items);	
+		}
+	}
+
 	addChangeListener(callback) {
-		this.addListener('create', callback);
+		this.addListener('change', callback);
 	}
 	
 	removeChangeListener(callback) {
-		this.removeListener('create', callback);
-	}
-
-	getAll() {
-		return items;
+		this.removeListener('change', callback);
 	}
 }
 

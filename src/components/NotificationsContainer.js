@@ -37,13 +37,14 @@ class NotificationsContainer extends React.Component {
 			<div className={ containerClasses }>
 				{ items.map((item, index) => {
 					return <Notification 
-						key={ index }
-						title={ item.title }
-						content={ item.content }
-						duration={ item.duration }
-						onCreate={ item.onCreate }
-						onClose={ item.onClose }
-					/>
+								key={ index }
+								item={ item }
+								title={ item.title }
+								content={ item.content }
+								duration={ item.duration }
+								onCreate={ item.onCreate }
+								onClose={ item.onClose }
+							/>
 				}) }
 			</div>
 		);
