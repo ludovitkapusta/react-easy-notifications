@@ -1,19 +1,31 @@
-import NotificationsContainer from '../components/NotificationsContainer';
+import { EventEmitter } from 'events';
+class notification extends EventEmitter {
+	constructor() {
+		super();
+		this.items = [];
+	}
 
-let items = [];
-
-export default {
-
-	create(title, duration) {
+    create(title, duration) {
 		const notification = {
 			title,
 			duration
 		}
 
-		items.push(notification);
-	},
+		this.items.push(notification);
+		this.emit('create', this.items);
+	};
+
+	addChangeListener(callback) {
+		this.addListener('create', callback);
+	}
+	
+	removeChangeListener(callback) {
+		this.removeListener('create', callback);
+	}
 
 	getAll() {
 		return items;
 	}
 }
+
+export default new notification();

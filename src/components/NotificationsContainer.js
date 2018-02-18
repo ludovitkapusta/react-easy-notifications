@@ -10,12 +10,19 @@ class NotificationsContainer extends React.Component {
 		this.state = {
 			items: []
 		}
-
-		setInterval(() => {
-			const items = notification.getAll();
-			this.setState({ items });
-		}, 100);
 	}
+
+	componentWillMount = () => {
+		notification.addChangeListener(this.handleStoreChange);
+	};
+	
+	componentWillUnmount = () => {
+		notification.removeChangeListener(this.handleStoreChange);
+	};
+
+	handleStoreChange = (items) => {
+		this.setState({ items });
+	};
 
 	render() {
 		const { items } = this.state;
