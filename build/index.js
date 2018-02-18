@@ -496,7 +496,7 @@ module.exports = require("react");
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -526,65 +526,66 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var NotificationsContainer = function (_React$Component) {
-	_inherits(NotificationsContainer, _React$Component);
+    _inherits(NotificationsContainer, _React$Component);
 
-	function NotificationsContainer(props) {
-		_classCallCheck(this, NotificationsContainer);
+    function NotificationsContainer(props) {
+        _classCallCheck(this, NotificationsContainer);
 
-		var _this = _possibleConstructorReturn(this, (NotificationsContainer.__proto__ || Object.getPrototypeOf(NotificationsContainer)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (NotificationsContainer.__proto__ || Object.getPrototypeOf(NotificationsContainer)).call(this, props));
 
-		_this.componentWillMount = function () {
-			_notificationHandler.notificationHandler.addChangeListener(_this.handleEventChange);
-		};
+        _this.componentWillMount = function () {
+            _notificationHandler.notificationHandler.addChangeListener(_this.handleEventChange);
+        };
 
-		_this.componentWillUnmount = function () {
-			_notificationHandler.notificationHandler.removeChangeListener(_this.handleEventChange);
-		};
+        _this.componentWillUnmount = function () {
+            _notificationHandler.notificationHandler.removeChangeListener(_this.handleEventChange);
+        };
 
-		_this.handleEventChange = function (items) {
-			_this.setState({ items: items });
-		};
+        _this.handleEventChange = function (items) {
+            _this.setState({ items: items });
+        };
 
-		_this.state = {
-			items: []
-		};
-		return _this;
-	}
+        _this.state = {
+            items: []
+        };
+        return _this;
+    }
 
-	_createClass(NotificationsContainer, [{
-		key: 'render',
-		value: function render() {
-			var items = this.state.items;
-			var className = this.props.className;
+    _createClass(NotificationsContainer, [{
+        key: 'render',
+        value: function render() {
+            var items = this.state.items;
+            var className = this.props.className;
 
 
-			var containerClasses = _utils.arrays.join('notification-container', className);
+            var containerClasses = _utils.arrays.join('notification-container', className);
 
-			return _react2.default.createElement(
-				'div',
-				{ className: containerClasses },
-				items.map(function (item, index) {
-					return _react2.default.createElement(_Notification2.default, {
-						key: index,
-						item: item,
-						title: item.title,
-						content: item.content,
-						duration: item.duration,
-						onCreate: item.onCreate,
-						onClose: item.onClose
-					});
-				})
-			);
-		}
-	}]);
+            return _react2.default.createElement(
+                'div',
+                { className: containerClasses },
+                items.map(function (item, index) {
+                    return;
+                    _react2.default.createElement(_Notification2.default, {
+                        key: index,
+                        item: item,
+                        title: item.title,
+                        content: item.content,
+                        duration: item.duration,
+                        onCreate: item.onCreate,
+                        onClose: item.onClose
+                    });
+                })
+            );
+        }
+    }]);
 
-	return NotificationsContainer;
+    return NotificationsContainer;
 }(_react2.default.Component);
 
 ;
 
 NotificationsContainer.propTypes = {
-	className: _propTypes2.default.string
+    className: _propTypes2.default.string
 };
 
 exports.default = NotificationsContainer;
@@ -1897,7 +1898,7 @@ exports.notificationHandler = _notificationHandler3.default;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1911,61 +1912,61 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var notificationHandler = function (_EventEmitter) {
-	_inherits(notificationHandler, _EventEmitter);
+    _inherits(notificationHandler, _EventEmitter);
 
-	function notificationHandler() {
-		_classCallCheck(this, notificationHandler);
+    function notificationHandler() {
+        _classCallCheck(this, notificationHandler);
 
-		var _this = _possibleConstructorReturn(this, (notificationHandler.__proto__ || Object.getPrototypeOf(notificationHandler)).call(this));
+        var _this = _possibleConstructorReturn(this, (notificationHandler.__proto__ || Object.getPrototypeOf(notificationHandler)).call(this));
 
-		_this.items = [];
-		return _this;
-	}
+        _this.items = [];
+        return _this;
+    }
 
-	_createClass(notificationHandler, [{
-		key: 'create',
-		value: function create(_ref) {
-			var title = _ref.title,
-			    content = _ref.content,
-			    duration = _ref.duration,
-			    onCreate = _ref.onCreate,
-			    onClose = _ref.onClose;
+    _createClass(notificationHandler, [{
+        key: 'create',
+        value: function create(_ref) {
+            var title = _ref.title,
+                content = _ref.content,
+                duration = _ref.duration,
+                onCreate = _ref.onCreate,
+                onClose = _ref.onClose;
 
-			var notification = {
-				title: title,
-				content: content,
-				duration: duration,
-				onCreate: onCreate,
-				onClose: onClose
-			};
+            var notification = {
+                title: title,
+                content: content,
+                duration: duration,
+                onCreate: onCreate,
+                onClose: onClose
+            };
 
-			this.items.push(notification);
-			this.emit('change', this.items);
-		}
-	}, {
-		key: 'destroy',
-		value: function destroy(item) {
-			var newItems = this.items;
-			var index = newItems.indexOf(item);
-			if (index > -1) {
-				newItems.splice(index, 1);
-				this.items = newItems;
-				this.emit('change', this.items);
-			}
-		}
-	}, {
-		key: 'addChangeListener',
-		value: function addChangeListener(callback) {
-			this.addListener('change', callback);
-		}
-	}, {
-		key: 'removeChangeListener',
-		value: function removeChangeListener(callback) {
-			this.removeListener('change', callback);
-		}
-	}]);
+            this.items.push(notification);
+            this.emit('change', this.items);
+        }
+    }, {
+        key: 'destroy',
+        value: function destroy(item) {
+            var newItems = this.items;
+            var index = newItems.indexOf(item);
+            if (index > -1) {
+                newItems.splice(index, 1);
+                this.items = newItems;
+                this.emit('change', this.items);
+            }
+        }
+    }, {
+        key: 'addChangeListener',
+        value: function addChangeListener(callback) {
+            this.addListener('change', callback);
+        }
+    }, {
+        key: 'removeChangeListener',
+        value: function removeChangeListener(callback) {
+            this.removeListener('change', callback);
+        }
+    }]);
 
-	return notificationHandler;
+    return notificationHandler;
 }(_events.EventEmitter);
 
 exports.default = new notificationHandler();

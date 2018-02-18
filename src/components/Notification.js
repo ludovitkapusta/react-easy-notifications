@@ -18,16 +18,16 @@ class Notification extends React.Component {
         if(onClose) onClose();
     }
 
-	render() {
+    render() {
         const { title, content, duration } = this.props;
 
-		return (
+        return (
             <div className="notification" data-duration="{ duration }">
                 <div className="notification--header">{ title }</div>
                 <div className="notification--content">{ content }</div>
             </div>
         )
-	};
+    };
 }
 
 Notification.PropTypes = {
