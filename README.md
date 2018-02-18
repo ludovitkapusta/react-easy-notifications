@@ -7,12 +7,12 @@ future command npm install react-easy-notifications
 ```
 
 Import `NotificationsContainer` and `notificationHandler` in your component class.
-```
+```jsx
 import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
 ```
 
 ## Example
-```
+```jsx
 import React, { Component } from 'react';
 import { NotificationsContainer, notification } from 'react-easy-notifications';
 
