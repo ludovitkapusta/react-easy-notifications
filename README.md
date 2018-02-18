@@ -13,21 +13,20 @@ import { NotificationsContainer, notificationHandler } from 'react-easy-notifica
 
 ## Examples
 
-Example for creating a notification
-
+Example for creating a notification and supported properties
 ```jsx
 notificationHandler.create({
-      title: 'Success!',
-      content: 'Your action was successfull',
-      duration: 3000,
-      onCreate: () => this.onCreate(),
-      onClose: () => this.onClose()
-    });
+  title: 'Success!',
+  content: 'Your action was successfull',
+  duration: 3000,
+  onCreate: () => this.onCreate(),
+  onClose: () => this.onClose()
+});
 ```
 Exmplae on implementaion
 ```jsx
 import React, { Component } from 'react';
-import { NotificationsContainer, notification } from 'react-easy-notifications';
+import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
 
 class App extends Component {
 
