@@ -20,4 +20,12 @@ class Notification extends React.Component {
 	};
 }
 
+Notification.PropTypes = {
+    title: PropTypes.string,
+    content: PropTypes.string,
+    duration: PropTypes.number,
+    onCreate: PropTypes.func,
+    onClick: PropTypes.func
+}
+
 export default Notification;
