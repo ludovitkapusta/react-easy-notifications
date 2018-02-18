@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Notification from './Notification';
 import { notificationHandler } from '../notificationHandler';
 import { arrays } from '../utils';
+import '../style.css';
 
 class NotificationsContainer extends React.Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class NotificationsContainer extends React.Component {
                         <Notification 
                             key={ index }
                             item={ item }
+                            className={ item.className }
                             title={ item.title }
                             content={ item.content }
                             duration={ item.duration }

@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { notificationHandler } from '../notificationHandler';
+import { arrays } from '../utils';
 
 class Notification extends React.Component {
     componentDidMount() {
         const { item, duration, onCreate } = this.props;
         if(onCreate) onCreate();
 
-        setTimeout(
-            () => notificationHandler.destroy(item),
-            duration
-        );
+        if(duration)
+            setTimeout(
+                () => notificationHandler.destroy(item),
+                duration
+            );
     }
 
     componentWillUnmount() {
@@ -19,10 +21,15 @@ class Notification extends React.Component {
     }
 
     render() {
-        const { title, content, duration } = this.props;
+        const { className, title, content, duration } = this.props;
+
+        const notificationClassName = arrays.join(
+            'notification',
+            className
+        );
 
         return (
-            <div className="notification" data-duration="{ duration }">
+            <div className={ notificationClassName } data-duration={ duration }>
                 <div className="notification--header">{ title }</div>
                 <div className="notification--content">{ content }</div>
             </div>
@@ -31,6 +38,7 @@ class Notification extends React.Component {
 }
 
 Notification.PropTypes = {
+    className: PropTypes.string,
     title: PropTypes.element,
     content: PropTypes.element,
     duration: PropTypes.number,

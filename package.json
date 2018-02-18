@@ -7,8 +7,10 @@
     "react": "^15.5.4"
   },
   "dependencies": {
+    "css-loader": "^0.28.9",
     "prop-types": "^15.6.0",
     "react": "^15.5.4",
+    "style-loader": "^0.20.2",
     "webpack": "^2.6.1"
   },
   "scripts": {

@@ -6,14 +6,15 @@ class notificationHandler extends EventEmitter {
         this.items = [];
     }
 
-    create({ title, content, duration, onCreate, onClose }) {
+    create( { className, title, content, duration, onCreate, onClose }) {
         const notification = {
+            className,
             title,
             content,
             duration,
             onCreate,
             onClose
-        }
+        };
 
         this.items.push(notification);
         this.emit('change', this.items);

@@ -1,5 +1,5 @@
 # React easy notifications
-Simple module for creating a notifications using React
+React module for creating a notifications using React
 ## Instalation
 Install **React easy notifications** by using npm command
 ```
