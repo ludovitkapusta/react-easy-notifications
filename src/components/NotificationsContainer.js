@@ -36,7 +36,7 @@ class NotificationsContainer extends React.Component {
         return (
             <div className={ containerClasses }>
                 { items.map((item, index) => {
-                    return 
+                    return (
                         <Notification 
                             key={ index }
                             item={ item }
@@ -46,6 +46,7 @@ class NotificationsContainer extends React.Component {
                             onCreate={ item.onCreate }
                             onClose={ item.onClose }
                         />
+                    )
                 }) }
             </div>
         );

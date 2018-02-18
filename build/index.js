@@ -564,8 +564,7 @@ var NotificationsContainer = function (_React$Component) {
                 'div',
                 { className: containerClasses },
                 items.map(function (item, index) {
-                    return;
-                    _react2.default.createElement(_Notification2.default, {
+                    return _react2.default.createElement(_Notification2.default, {
                         key: index,
                         item: item,
                         title: item.title,
