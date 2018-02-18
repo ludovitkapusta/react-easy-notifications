@@ -11,7 +11,20 @@ Import `NotificationsContainer` and `notificationHandler` in your component clas
 import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
 ```
 
-## Example
+## Examples
+
+Example for creating a notification
+
+```jsx
+notificationHandler.create({
+      title: 'Success!',
+      content: 'Your action was successfull',
+      duration: 3000,
+      onCreate: () => this.onCreate(),
+      onClose: () => this.onClose()
+    });
+```
+Exmplae on implementaion
 ```jsx
 import React, { Component } from 'react';
 import { NotificationsContainer, notification } from 'react-easy-notifications';
