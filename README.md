@@ -18,25 +18,25 @@ import { NotificationsContainer, notification } from 'react-easy-notifications';
 
 class App extends Component {
 
-	createSuccessNotification = (event) => {
-		event.preventDefault();
-		notificationHandler.create({
-			title: 'Success!',
-			content: 'Your action was successfull',
-			duration: 3000,
-			onCreate: () => this.onCreate(),
-			onClose: () => this.onClose()
-		});
-	}
+  createSuccessNotification = (event) => {
+    event.preventDefault();
+    notificationHandler.create({
+      title: 'Success!',
+      content: 'Your action was successfull',
+      duration: 3000,
+      onCreate: () => this.onCreate(),
+      onClose: () => this.onClose()
+    });
+  }
 
-	render() {
-		return (
-			<div>
-				<button onClick={ this.createSuccessNotification }>success notification</button>
-				<NotificationsContainer />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <button onClick={ this.createSuccessNotification }>success notification</button>
+        <NotificationsContainer />
+      </div>
+    );
+  }
 }
 
 export default App;
