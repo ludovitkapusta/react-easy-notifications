@@ -566,6 +566,7 @@ var NotificationsContainer = function (_React$Component) {
 				items.map(function (item, index) {
 					return _react2.default.createElement(_Notification2.default, {
 						key: index,
+						item: item,
 						title: item.title,
 						content: item.content,
 						duration: item.duration,
@@ -610,6 +611,8 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _notificationHandler = __webpack_require__(20);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -630,19 +633,31 @@ var Notification = function (_React$Component) {
     _createClass(Notification, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var onCreate = this.props.onCreate;
+            var _props = this.props,
+                item = _props.item,
+                duration = _props.duration,
+                onCreate = _props.onCreate;
 
-            if (onCreate) this.props.onCreate();
+            if (onCreate) onCreate();
+
+            setTimeout(function () {
+                return _notificationHandler.notificationHandler.destroy(item);
+            }, duration);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            var onClose = this.props.onClose;
+
+            if (onClose) onClose();
         }
     }, {
         key: 'render',
         value: function render() {
-            var _props = this.props,
-                title = _props.title,
-                content = _props.content,
-                duration = _props.duration,
-                onCreate = _props.onCreate,
-                onClose = _props.onClose;
+            var _props2 = this.props,
+                title = _props2.title,
+                content = _props2.content,
+                duration = _props2.duration;
 
 
             return _react2.default.createElement(
@@ -657,11 +672,6 @@ var Notification = function (_React$Component) {
                     'div',
                     { className: 'notification--content' },
                     content
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: onClose },
-                    'close'
                 )
             );
         }
@@ -671,8 +681,8 @@ var Notification = function (_React$Component) {
 }(_react2.default.Component);
 
 Notification.PropTypes = {
-    title: _propTypes2.default.string,
-    content: _propTypes2.default.string,
+    title: _propTypes2.default.element,
+    content: _propTypes2.default.element,
     duration: _propTypes2.default.number,
     onCreate: _propTypes2.default.func,
     onClick: _propTypes2.default.func
@@ -1930,22 +1940,28 @@ var notificationHandler = function (_EventEmitter) {
 			};
 
 			this.items.push(notification);
-			this.emit('create', this.items);
+			this.emit('change', this.items);
+		}
+	}, {
+		key: 'destroy',
+		value: function destroy(item) {
+			var newItems = this.items;
+			var index = newItems.indexOf(item);
+			if (index > -1) {
+				newItems.splice(index, 1);
+				this.items = newItems;
+				this.emit('change', this.items);
+			}
 		}
 	}, {
 		key: 'addChangeListener',
 		value: function addChangeListener(callback) {
-			this.addListener('create', callback);
+			this.addListener('change', callback);
 		}
 	}, {
 		key: 'removeChangeListener',
 		value: function removeChangeListener(callback) {
-			this.removeListener('create', callback);
-		}
-	}, {
-		key: 'getAll',
-		value: function getAll() {
-			return items;
+			this.removeListener('change', callback);
 		}
 	}]);
 
