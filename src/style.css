@@ -6,19 +6,19 @@
 }
 
 .notification {
-    width: 300px;
+    width: 400px;
     padding: 20px;
     color: #fff;
 }
 
-.notification--success {
+.notification-success {
     background: rgb(129, 230, 154);
 }
 
-.notification--warning {
+.notification-warning {
     background: rgb(243, 140, 140);
 }
 
-.notification--info {
+.notification-info {
     background: rgb(142, 223, 255);
 }
