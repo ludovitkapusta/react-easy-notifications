@@ -29,9 +29,9 @@ class Notification extends React.Component {
         );
 
         return (
-            <div className={ notificationClassName } data-duration={ duration }>
-                <div className="notification-header">{ title }</div>
-                <div className="notification-content">{ content }</div>
+            <div className={ notificationClassName }>
+                { title && <div className="notification-header">{ title }</div> }
+                { content && <div className="notification-content">{ content }</div> }
             </div>
         )
     };

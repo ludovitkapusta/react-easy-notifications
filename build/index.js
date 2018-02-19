@@ -709,13 +709,13 @@ var Notification = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: notificationClassName, 'data-duration': duration },
-                _react2.default.createElement(
+                { className: notificationClassName },
+                title && _react2.default.createElement(
                     'div',
                     { className: 'notification-header' },
                     title
                 ),
-                _react2.default.createElement(
+                content && _react2.default.createElement(
                     'div',
                     { className: 'notification-content' },
                     content
