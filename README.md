@@ -19,7 +19,7 @@ Example for creating a notification with supported properties
 notificationHandler.create({
   title: 'Success!',
   content: 'Your action was successfull',
-  className: 'notification--success'
+  className: 'notification-success'
   duration: 3000,
   onCreate: () => this.onCreate(),
   onClose: () => this.onClose()
