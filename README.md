@@ -72,7 +72,7 @@ It is advised to use your own styles as these notifications are intended unstyle
 > Sets content, or the body of the notification. Expects string. You can use your own style by using `.notification-content` class.
 ---
 #### `notificationHandler.create({ duration: 3000 });`
-> Sets how long will notification be shown to the use. Expects number.
+> Sets how long will notification be shown to the user. Expects number. If duration is not set, notification will live until page is refreshed or `<NotificationsContainer />` is unmounted.
 ---
 #### `notificationHandler.create({ onCreate: () => {}) });`
 > Gives you ability to call your own callback when notification was created. Expects function.
