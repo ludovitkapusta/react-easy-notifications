@@ -9,6 +9,7 @@
     width: 400px;
     padding: 20px;
     color: #fff;
+    word-wrap: break-word;
 }
 
 .notification-success {

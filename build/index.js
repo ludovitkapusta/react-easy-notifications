@@ -900,7 +900,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, ".notification-container {\n    font-family: sans-serif;\n    position: absolute;\n    top: 50px;\n    left: 0;\n}\n\n.notification {\n    width: 400px;\n    padding: 20px;\n    color: #fff;\n}\n\n.notification-success {\n    background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n    background: rgb(243, 140, 140);\n}\n\n.notification-info {\n    background: rgb(142, 223, 255);\n}", ""]);
+exports.push([module.i, ".notification-container {\n    font-family: sans-serif;\n    position: absolute;\n    top: 50px;\n    left: 0;\n}\n\n.notification {\n    width: 400px;\n    padding: 20px;\n    color: #fff;\n    word-wrap: break-word;\n}\n\n.notification-success {\n    background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n    background: rgb(243, 140, 140);\n}\n\n.notification-info {\n    background: rgb(142, 223, 255);\n}", ""]);
 
 // exports
 
