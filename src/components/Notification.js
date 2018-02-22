@@ -4,7 +4,7 @@ import notificationHandler from '../notificationHandler';
 import { arrays } from '../utils';
 
 class Notification extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
