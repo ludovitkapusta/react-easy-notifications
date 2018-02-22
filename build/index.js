@@ -265,17 +265,80 @@ process.umask = function() { return 0; };
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-exports.notificationHandler = undefined;
 
-var _notificationHandler2 = __webpack_require__(12);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _notificationHandler3 = _interopRequireDefault(_notificationHandler2);
+var _events = __webpack_require__(15);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-exports.notificationHandler = _notificationHandler3.default;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var notificationHandler = function (_EventEmitter) {
+    _inherits(notificationHandler, _EventEmitter);
+
+    function notificationHandler() {
+        _classCallCheck(this, notificationHandler);
+
+        var _this = _possibleConstructorReturn(this, (notificationHandler.__proto__ || Object.getPrototypeOf(notificationHandler)).call(this));
+
+        _this.items = [];
+        return _this;
+    }
+
+    _createClass(notificationHandler, [{
+        key: 'create',
+        value: function create(_ref) {
+            var className = _ref.className,
+                title = _ref.title,
+                content = _ref.content,
+                duration = _ref.duration,
+                onCreate = _ref.onCreate,
+                onClose = _ref.onClose;
+
+            var notification = {
+                className: className,
+                title: title,
+                content: content,
+                duration: duration,
+                onCreate: onCreate,
+                onClose: onClose
+            };
+
+            this.items.push(notification);
+            this.emit('change', this.items);
+        }
+    }, {
+        key: 'destroy',
+        value: function destroy(item) {
+            var newItems = this.items;
+            var index = newItems.indexOf(item);
+            if (index > -1) {
+                newItems.splice(index, 1);
+                this.items = newItems;
+                this.emit('change', this.items);
+            }
+        }
+    }, {
+        key: 'addChangeListener',
+        value: function addChangeListener(callback) {
+            this.addListener('change', callback);
+        }
+    }, {
+        key: 'removeChangeListener',
+        value: function removeChangeListener(callback) {
+            this.removeListener('change', callback);
+        }
+    }]);
+
+    return notificationHandler;
+}(_events.EventEmitter);
+
+exports.default = new notificationHandler();
 
 /***/ }),
 /* 2 */
@@ -410,7 +473,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.arrays = undefined;
 
-var _arrays2 = __webpack_require__(13);
+var _arrays2 = __webpack_require__(12);
 
 var _arrays3 = _interopRequireDefault(_arrays2);
 
@@ -513,11 +576,11 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(20)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(19)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(19)();
+  module.exports = __webpack_require__(18)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -555,9 +618,11 @@ var _Notification2 = _interopRequireDefault(_Notification);
 
 var _notificationHandler = __webpack_require__(1);
 
+var _notificationHandler2 = _interopRequireDefault(_notificationHandler);
+
 var _utils = __webpack_require__(5);
 
-__webpack_require__(21);
+__webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -576,11 +641,11 @@ var NotificationsContainer = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (NotificationsContainer.__proto__ || Object.getPrototypeOf(NotificationsContainer)).call(this, props));
 
         _this.componentWillMount = function () {
-            _notificationHandler.notificationHandler.addChangeListener(_this.handleEventChange);
+            _notificationHandler2.default.addChangeListener(_this.handleEventChange);
         };
 
         _this.componentWillUnmount = function () {
-            _notificationHandler.notificationHandler.removeChangeListener(_this.handleEventChange);
+            _notificationHandler2.default.removeChangeListener(_this.handleEventChange);
         };
 
         _this.handleEventChange = function (items) {
@@ -658,6 +723,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _notificationHandler = __webpack_require__(1);
 
+var _notificationHandler2 = _interopRequireDefault(_notificationHandler);
+
 var _utils = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -694,7 +761,7 @@ var Notification = function (_React$Component) {
             this.setState({ showClass: 'notification-show' });
 
             if (duration) setTimeout(function () {
-                return _notificationHandler.notificationHandler.destroy(item);
+                return _notificationHandler2.default.destroy(item);
             }, duration);
         }
     }, {
@@ -766,96 +833,15 @@ var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
 
 var _notificationHandler = __webpack_require__(1);
 
+var _notificationHandler2 = _interopRequireDefault(_notificationHandler);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.notificationHandler = _notificationHandler.notificationHandler;
+exports.notificationHandler = _notificationHandler2.default;
 exports.NotificationsContainer = _NotificationsContainer2.default;
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _events = __webpack_require__(16);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var notificationHandler = function (_EventEmitter) {
-    _inherits(notificationHandler, _EventEmitter);
-
-    function notificationHandler() {
-        _classCallCheck(this, notificationHandler);
-
-        var _this = _possibleConstructorReturn(this, (notificationHandler.__proto__ || Object.getPrototypeOf(notificationHandler)).call(this));
-
-        _this.items = [];
-        return _this;
-    }
-
-    _createClass(notificationHandler, [{
-        key: 'create',
-        value: function create(_ref) {
-            var className = _ref.className,
-                title = _ref.title,
-                content = _ref.content,
-                duration = _ref.duration,
-                onCreate = _ref.onCreate,
-                onClose = _ref.onClose;
-
-            var notification = {
-                className: className,
-                title: title,
-                content: content,
-                duration: duration,
-                onCreate: onCreate,
-                onClose: onClose
-            };
-
-            this.items.push(notification);
-            this.emit('change', this.items);
-        }
-    }, {
-        key: 'destroy',
-        value: function destroy(item) {
-            var newItems = this.items;
-            var index = newItems.indexOf(item);
-            if (index > -1) {
-                newItems.splice(index, 1);
-                this.items = newItems;
-                this.emit('change', this.items);
-            }
-        }
-    }, {
-        key: 'addChangeListener',
-        value: function addChangeListener(callback) {
-            this.addListener('change', callback);
-        }
-    }, {
-        key: 'removeChangeListener',
-        value: function removeChangeListener(callback) {
-            this.removeListener('change', callback);
-        }
-    }]);
-
-    return notificationHandler;
-}(_events.EventEmitter);
-
-exports.default = new notificationHandler();
-
-/***/ }),
-/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -902,21 +888,21 @@ exports.default = {
 };
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(15)(false);
+exports = module.exports = __webpack_require__(14)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".notification-container {\n    font-family: sans-serif;\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n\n.notification-container.left-top {\n    left: 0;\n    right: auto;\n}\n\n.notification-container.right-top {\n    right: 0;\n    left: auto;\n}\n\n@-webkit-keyframes fadeIn {\n    from { opacity: 0; margin-left: 100%; }\n      to { opacity: 1; margin-left: 0; }\n}  \n@keyframes fadeIn {\n    from { opacity: 0; margin-left: 100%; }\n      to { opacity: 1; margin-left: 0; }\n}\n\n.notification {\n    width: 400px;\n    padding: 20px;\n    margin-bottom: 10px;\n    color: #fff;\n    word-wrap: break-word;\n}\n.notification-show {\n    /* margin-left: 0; */\n    -webkit-animation: fadeIn .3s;\n    animation: fadeIn .3s;\n    display: block;\n}\n\n.notification-success {\n    background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n    background: rgb(243, 140, 140);\n}\n\n.notification-info {\n    background: rgb(142, 223, 255);\n}", ""]);
+exports.push([module.i, ".notification-container {\n    font-family: sans-serif;\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n\n.notification-container.left-top {\n    left: 0;\n    right: auto;\n}\n\n.notification-container.right-top {\n    right: 0;\n    left: auto;\n}\n\n@-webkit-keyframes fadeIn {\n    from { opacity: 0; margin-left: 100%; }\n      to { opacity: 1; margin-left: 0; }\n}  \n@keyframes fadeIn {\n    from { opacity: 0; margin-left: 100%; }\n      to { opacity: 1; margin-left: 0; }\n}\n\n.notification {\n    width: 400px;\n    padding: 20px;\n    margin-bottom: 10px;\n    color: #fff;\n    word-wrap: break-word;\n}\n\n.notification-show {\n    /* margin-left: 0; */\n    -webkit-animation: fadeIn .3s;\n    animation: fadeIn .3s;\n    display: block;\n}\n\n.notification-success {\n    background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n    background: rgb(243, 140, 140);\n}\n\n.notification-info {\n    background: rgb(142, 223, 255);\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /*
@@ -998,7 +984,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -1306,7 +1292,7 @@ function isUndefined(arg) {
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1403,7 +1389,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1470,7 +1456,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1535,7 +1521,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1551,10 +1537,10 @@ module.exports = function() {
 var emptyFunction = __webpack_require__(2);
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(6);
-var assign = __webpack_require__(17);
+var assign = __webpack_require__(16);
 
 var ReactPropTypesSecret = __webpack_require__(4);
-var checkPropTypes = __webpack_require__(18);
+var checkPropTypes = __webpack_require__(17);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -2085,11 +2071,11 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(14);
+var content = __webpack_require__(13);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -2103,7 +2089,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(22)(content, options);
+var update = __webpack_require__(21)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -2135,7 +2121,7 @@ if(false) {
 }
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -2201,7 +2187,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(23);
+var	fixUrls = __webpack_require__(22);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -2517,7 +2503,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports) {
 
 

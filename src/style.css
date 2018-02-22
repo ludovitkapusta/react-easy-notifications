@@ -31,6 +31,7 @@
     color: #fff;
     word-wrap: break-word;
 }
+
 .notification-show {
     /* margin-left: 0; */
     -webkit-animation: fadeIn .3s;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
-import { notificationHandler } from '../notificationHandler';
+import notificationHandler from '../notificationHandler';
 import { arrays } from '../utils';
 import '../style.css';
 

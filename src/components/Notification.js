@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { notificationHandler } from '../notificationHandler';
+import notificationHandler from '../notificationHandler';
 import { arrays } from '../utils';
 
 class Notification extends React.Component {
