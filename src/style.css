@@ -1,15 +1,41 @@
 .notification-container {
     font-family: sans-serif;
     position: absolute;
-    top: 50px;
+    top: 0;
     left: 0;
+}
+
+.notification-container.left-top {
+    left: 0;
+    right: auto;
+}
+
+.notification-container.right-top {
+    right: 0;
+    left: auto;
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; margin-left: 100%; }
+      to { opacity: 1; margin-left: 0; }
+}  
+@keyframes fadeIn {
+    from { opacity: 0; margin-left: 100%; }
+      to { opacity: 1; margin-left: 0; }
 }
 
 .notification {
     width: 400px;
     padding: 20px;
+    margin-bottom: 10px;
     color: #fff;
     word-wrap: break-word;
+}
+.notification-show {
+    /* margin-left: 0; */
+    -webkit-animation: fadeIn .3s;
+    animation: fadeIn .3s;
+    display: block;
 }
 
 .notification-success {

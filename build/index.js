@@ -597,10 +597,13 @@ var NotificationsContainer = function (_React$Component) {
         key: 'render',
         value: function render() {
             var items = this.state.items;
-            var className = this.props.className;
+            var _props = this.props,
+                className = _props.className,
+                position = _props.position;
 
+            // const position = 'right-top';
 
-            var containerClasses = _utils.arrays.join('notification-container', className);
+            var containerClasses = _utils.arrays.join('notification-container', className, position);
 
             return _react2.default.createElement(
                 'div',
@@ -668,10 +671,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Notification = function (_React$Component) {
     _inherits(Notification, _React$Component);
 
-    function Notification() {
+    function Notification(props) {
         _classCallCheck(this, Notification);
 
-        return _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).call(this, props));
+
+        _this.state = {
+            showClass: ''
+        };
+        return _this;
     }
 
     _createClass(Notification, [{
@@ -683,6 +691,7 @@ var Notification = function (_React$Component) {
                 onCreate = _props.onCreate;
 
             if (onCreate) onCreate();
+            this.setState({ showClass: 'notification-show' });
 
             if (duration) setTimeout(function () {
                 return _notificationHandler.notificationHandler.destroy(item);
@@ -703,9 +712,10 @@ var Notification = function (_React$Component) {
                 title = _props2.title,
                 content = _props2.content,
                 duration = _props2.duration;
+            var showClass = this.state.showClass;
 
 
-            var notificationClassName = _utils.arrays.join('notification', className);
+            var notificationClassName = _utils.arrays.join('notification', className, showClass);
 
             return _react2.default.createElement(
                 'div',
@@ -900,7 +910,7 @@ exports = module.exports = __webpack_require__(15)(false);
 
 
 // module
-exports.push([module.i, ".notification-container {\n    font-family: sans-serif;\n    position: absolute;\n    top: 50px;\n    left: 0;\n}\n\n.notification {\n    width: 400px;\n    padding: 20px;\n    color: #fff;\n    word-wrap: break-word;\n}\n\n.notification-success {\n    background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n    background: rgb(243, 140, 140);\n}\n\n.notification-info {\n    background: rgb(142, 223, 255);\n}", ""]);
+exports.push([module.i, ".notification-container {\n    font-family: sans-serif;\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n\n.notification-container.left-top {\n    left: 0;\n    right: auto;\n}\n\n.notification-container.right-top {\n    right: 0;\n    left: auto;\n}\n\n@-webkit-keyframes fadeIn {\n    from { opacity: 0; margin-left: 100%; }\n      to { opacity: 1; margin-left: 0; }\n}  \n@keyframes fadeIn {\n    from { opacity: 0; margin-left: 100%; }\n      to { opacity: 1; margin-left: 0; }\n}\n\n.notification {\n    width: 400px;\n    padding: 20px;\n    margin-bottom: 10px;\n    color: #fff;\n    word-wrap: break-word;\n}\n.notification-show {\n    /* margin-left: 0; */\n    -webkit-animation: fadeIn .3s;\n    animation: fadeIn .3s;\n    display: block;\n}\n\n.notification-success {\n    background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n    background: rgb(243, 140, 140);\n}\n\n.notification-info {\n    background: rgb(142, 223, 255);\n}", ""]);
 
 // exports
 

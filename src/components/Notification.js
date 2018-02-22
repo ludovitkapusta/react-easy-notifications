@@ -4,9 +4,17 @@ import { notificationHandler } from '../notificationHandler';
 import { arrays } from '../utils';
 
 class Notification extends React.Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            showClass: ''
+        }
+    }
     componentDidMount() {
         const { item, duration, onCreate } = this.props;
         if(onCreate) onCreate();
+        this.setState({ showClass: 'notification-show' });
 
         if(duration)
             setTimeout(
@@ -22,10 +30,12 @@ class Notification extends React.Component {
 
     render() {
         const { className, title, content, duration } = this.props;
+        const { showClass } = this.state;
 
         const notificationClassName = arrays.join(
             'notification',
-            className
+            className,
+            showClass
         );
 
         return (
