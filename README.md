@@ -62,6 +62,15 @@ Having more `<NotificationsContainer />` compontents in your current rendered ap
 It is advised to use your own styles as these notifications are intended unstyled.
 
 ## Properties
+### `<NotificationsContainer />`
+`<NotificationsContainer />` needs to be presented in any part of your aplication. You can determine position of your notification by adding position prop.
+
+---
+#### `position="left-top | left-bottom | right-top | right-bottom"`
+>Sets the position of notifications.
+---
+
+### `notificationHandler`
 `notificationHandler.create({})` is prepared with thoughts to have ability to set up every notification the way you want to have it. With this, few set options was implemented.
 
 ---
