@@ -66,7 +66,7 @@ It is advised to use your own styles as these notifications are intended unstyle
 `<NotificationsContainer />` needs to be presented in any part of your aplication. You can determine position of your notification by adding position prop.
 
 ---
-#### `position="left-top | left-bottom | right-top | right-bottom"`
+#### `position="top-left | bottom-left | top-right | bottom-right"`
 >Sets the position of notifications.
 ---
 
@@ -88,4 +88,7 @@ It is advised to use your own styles as these notifications are intended unstyle
 ---
 #### `notification.create({ onClose: () => {}) });`
 > Gives you ability to call your own callback when notification was closed. Expects function.
+---
+#### `notification.create({ closeOnClick: true|false });`
+> Allow/disallow closing notification by clicking on the notification
 ---
