@@ -742,6 +742,12 @@ var Notification = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).call(this, props));
 
+        _this.closeNotification = function () {
+            var item = _this.props.item;
+
+            _notificationHandler2.default.destroy(item);
+        };
+
         _this.state = {
             showClass: ''
         };
@@ -785,7 +791,9 @@ var Notification = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: notificationClassName },
+                {
+                    className: notificationClassName,
+                    onClick: this.closeNotification },
                 title && _react2.default.createElement(
                     'div',
                     { className: 'notification-header' },

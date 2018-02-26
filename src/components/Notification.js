@@ -11,6 +11,7 @@ class Notification extends React.Component {
             showClass: ''
         }
     }
+
     componentDidMount() {
         const { item, duration, onCreate } = this.props;
         if(onCreate) onCreate();
@@ -28,6 +29,11 @@ class Notification extends React.Component {
         if(onClose) onClose();
     }
 
+    closeNotification = () => {
+        const { item } = this.props;
+        notificationHandler.destroy(item);
+    }
+
     render() {
         const { className, title, content, duration } = this.props;
         const { showClass } = this.state;
@@ -39,7 +45,9 @@ class Notification extends React.Component {
         );
 
         return (
-            <div className={ notificationClassName }>
+            <div
+                className={ notificationClassName }
+                onClick={ this.closeNotification } >
                 { title && <div className="notification-header">{ title }</div> }
                 { content && <div className="notification-content">{ content }</div> }
             </div>
