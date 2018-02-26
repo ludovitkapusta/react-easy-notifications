@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
-import notificationHandler from '../notificationHandler';
+import notification from '../notification';
 import { arrays } from '../utils';
 import '../style.css';
 
@@ -14,11 +14,11 @@ class NotificationsContainer extends React.Component {
     }
 
     componentWillMount = () => {
-        notificationHandler.addChangeListener(this.handleEventChange);
+        notification.addChangeListener(this.handleEventChange);
     };
     
     componentWillUnmount = () => {
-        notificationHandler.removeChangeListener(this.handleEventChange);
+        notification.removeChangeListener(this.handleEventChange);
     };
 
     handleEventChange = (items) => {

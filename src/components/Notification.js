@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import notificationHandler from '../notificationHandler';
+import notification from '../notification';
 import { arrays } from '../utils';
 
 class Notification extends React.Component {
@@ -19,7 +19,7 @@ class Notification extends React.Component {
 
         if(duration)
             setTimeout(
-                () => notificationHandler.destroy(item),
+                () => notification.destroy(item),
                 duration
             );
     }
@@ -31,7 +31,7 @@ class Notification extends React.Component {
 
     closeNotification = () => {
         const { item } = this.props;
-        notificationHandler.destroy(item);
+        notification.destroy(item);
     }
 
     render() {

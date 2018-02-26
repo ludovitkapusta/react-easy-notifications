@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-class notificationHandler extends EventEmitter {
+class notification extends EventEmitter {
     constructor() {
         super();
         this.items = [];
@@ -39,4 +39,4 @@ class notificationHandler extends EventEmitter {
     }
 }
 
-export default new notificationHandler();
+export default new notification();

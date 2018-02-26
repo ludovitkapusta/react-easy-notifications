@@ -6,17 +6,17 @@ Install **React easy notifications** by using npm command
 //here will be npm command
 ```
 
-Import `NotificationsContainer` and `notificationHandler` in your component class alongside React
+Import `NotificationsContainer` and `notification` in your component class alongside React
 ```jsx
 import React from 'react';
-import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
+import { NotificationsContainer, notification } from 'react-easy-notifications';
 ```
 
 ## Examples
 
 Example for creating a notification with supported properties
 ```jsx
-notificationHandler.create({
+notification.create({
   title: 'Success!',
   content: 'Your action was successfull',
   className: 'notification-success',
@@ -28,12 +28,12 @@ notificationHandler.create({
 Example implementaion of **React Easy Notifications**
 ```jsx
 import React, { Component } from 'react';
-import { NotificationsContainer, notificationHandler } from 'react-easy-notifications';
+import { NotificationsContainer, notification } from 'react-easy-notifications';
 
 class App extends Component {
   createSuccessNotification = (event) => {
     event.preventDefault();
-    notificationHandler.create({
+    notification.create({
       title: 'Success!',
       content: 'Your action was successfull',
       duration: 3000,
@@ -70,22 +70,22 @@ It is advised to use your own styles as these notifications are intended unstyle
 >Sets the position of notifications.
 ---
 
-### `notificationHandler`
-`notificationHandler.create({})` is prepared with thoughts to have ability to set up every notification the way you want to have it. With this, few set options was implemented.
+### `notification`
+`notification.create({})` is prepared with thoughts to have ability to set up every notification the way you want to have it. With this, few set options was implemented.
 
 ---
-#### `notificationHandler.create({ title: 'Title' });`
+#### `notification.create({ title: 'Title' });`
 >Sets title of the notification. Expects string. You can use your own style by using `.notification-header` class.
 ---
-#### `notificationHandler.create({ content: 'Content' });`
+#### `notification.create({ content: 'Content' });`
 > Sets content, or the body of the notification. Expects string. You can use your own style by using `.notification-content` class.
 ---
-#### `notificationHandler.create({ duration: 3000 });`
+#### `notification.create({ duration: 3000 });`
 > Sets how long will notification be shown to the user. Expects number. If duration is not set, notification will live until page is refreshed or `<NotificationsContainer />` is unmounted.
 ---
-#### `notificationHandler.create({ onCreate: () => {}) });`
+#### `notification.create({ onCreate: () => {}) });`
 > Gives you ability to call your own callback when notification was created. Expects function.
 ---
-#### `notificationHandler.create({ onClose: () => {}) });`
+#### `notification.create({ onClose: () => {}) });`
 > Gives you ability to call your own callback when notification was closed. Expects function.
 ---
