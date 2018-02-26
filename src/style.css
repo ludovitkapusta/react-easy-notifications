@@ -15,13 +15,34 @@
     left: auto;
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes fadeInRight {
     from { opacity: 0; margin-left: 100%; }
       to { opacity: 1; margin-left: 0; }
 }  
-@keyframes fadeIn {
+@keyframes fadeInRight {
     from { opacity: 0; margin-left: 100%; }
       to { opacity: 1; margin-left: 0; }
+}
+
+@-webkit-keyframes fadeInLeft {
+    from { opacity: 0; margin-left: -100%; }
+      to { opacity: 1; margin-left: 0; }
+}  
+@keyframes fadeInLeft {
+    from { opacity: 0; margin-left: -100%; }
+      to { opacity: 1; margin-left: 0; }
+}
+
+.notification-container.left-top .notification-show {
+    -webkit-animation: fadeInLeft .3s;
+    animation: fadeInLeft .3s;
+    display: block;
+}
+
+.notification-container.right-top .notification-show {
+    -webkit-animation: fadeInRight .3s;
+    animation: fadeInRight .3s;
+    display: block;
 }
 
 .notification {
@@ -30,13 +51,7 @@
     margin-bottom: 10px;
     color: #fff;
     word-wrap: break-word;
-}
-
-.notification-show {
-    /* margin-left: 0; */
-    -webkit-animation: fadeIn .3s;
-    animation: fadeIn .3s;
-    display: block;
+    box-shadow: 0px 4px 12px -5px #000;
 }
 
 .notification-success {

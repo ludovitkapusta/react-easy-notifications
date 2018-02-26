@@ -29,8 +29,6 @@ class NotificationsContainer extends React.Component {
         const { items } = this.state;
         const { className, position } = this.props;
 
-        // const position = 'right-top';
-
         const containerClasses = arrays.join(
             'notification-container',
             className,
