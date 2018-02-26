@@ -599,7 +599,8 @@ var NotificationsContainer = function (_React$Component) {
                         content: item.content,
                         duration: item.duration,
                         onCreate: item.onCreate,
-                        onClose: item.onClose
+                        onClose: item.onClose,
+                        closeOnClick: item.closeOnClick
                     });
                 })
             );
@@ -661,9 +662,13 @@ var Notification = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).call(this, props));
 
         _this.closeNotification = function () {
-            var item = _this.props.item;
+            var _this$props = _this.props,
+                item = _this$props.item,
+                closeOnClick = _this$props.closeOnClick;
 
-            _notification2.default.destroy(item);
+            if (closeOnClick) {
+                _notification2.default.destroy(item);
+            }
         };
 
         _this.state = {
@@ -735,7 +740,12 @@ Notification.PropTypes = {
     content: _propTypes2.default.element,
     duration: _propTypes2.default.number,
     onCreate: _propTypes2.default.func,
-    onClick: _propTypes2.default.func
+    onClick: _propTypes2.default.func,
+    closeOnClick: _propTypes2.default.bool
+};
+
+Notification.defaultProps = {
+    closeOnClick: true
 };
 
 exports.default = Notification;
@@ -821,7 +831,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, ".notification-container {\n  font-family: sans-serif;\n  text-align: left;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.notification-container.left-top {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.right-top {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notification-container.left-bottom {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.right-bottom {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n\n@-webkit-keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }\n@keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }\n@-webkit-keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }\n@keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }\n\n.notification-container.left-top .notification-show {\n  -webkit-animation: fadeInLeft .3s;\n  animation: fadeInLeft .3s;\n  display: block;\n}\n\n.notification-container.right-top .notification-show {\n  -webkit-animation: fadeInRight .3s;\n  animation: fadeInRight .3s;\n  display: block;\n}\n\n.notification-container.left-bottom .notification-show {\n  -webkit-animation: fadeInLeft .3s;\n  animation: fadeInLeft .3s;\n  display: block;\n}\n\n.notification-container.right-bottom .notification-show {\n  -webkit-animation: fadeInRight .3s;\n  animation: fadeInRight .3s;\n  display: block;\n}\n\n.notification {\n  width: 400px;\n  padding: 20px;\n  margin-bottom: 10px;\n  color: #fff;\n  word-wrap: break-word;\n  box-shadow: 0px 4px 12px -5px #000;\n}\n\n.notification-success {\n  background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n  background: rgb(243, 140, 140);\n}\n\n.notification-info {\n  background: rgb(142, 223, 255);\n}", ""]);
+exports.push([module.i, ".notification-container {\n  font-family: sans-serif;\n  text-align: left;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.notification-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notification-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n\n@-webkit-keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }\n@keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }\n@-webkit-keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }\n@keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }\n\n.notification-container.top-left .notification-show {\n  -webkit-animation: fadeInLeft .3s;\n  animation: fadeInLeft .3s;\n  display: block;\n}\n\n.notification-container.top-right .notification-show {\n  -webkit-animation: fadeInRight .3s;\n  animation: fadeInRight .3s;\n  display: block;\n}\n\n.notification-container.bottom-left .notification-show {\n  -webkit-animation: fadeInLeft .3s;\n  animation: fadeInLeft .3s;\n  display: block;\n}\n\n.notification-container.bottom-right .notification-show {\n  -webkit-animation: fadeInRight .3s;\n  animation: fadeInRight .3s;\n  display: block;\n}\n\n.notification {\n  width: 400px;\n  padding: 20px;\n  margin-bottom: 10px;\n  color: #fff;\n  word-wrap: break-word;\n  box-shadow: 0px 4px 12px -5px #000;\n}\n\n.notification-success {\n  background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n  background: rgb(243, 140, 140);\n}\n\n.notification-info {\n  background: rgb(142, 223, 255);\n}", ""]);
 
 // exports
 
@@ -2563,7 +2573,8 @@ var notification = function (_EventEmitter) {
                 content = _ref.content,
                 duration = _ref.duration,
                 onCreate = _ref.onCreate,
-                onClose = _ref.onClose;
+                onClose = _ref.onClose,
+                closeOnClick = _ref.closeOnClick;
 
             var notification = {
                 className: className,
@@ -2571,7 +2582,8 @@ var notification = function (_EventEmitter) {
                 content: content,
                 duration: duration,
                 onCreate: onCreate,
-                onClose: onClose
+                onClose: onClose,
+                closeOnClick: closeOnClick
             };
 
             this.items.push(notification);

@@ -30,8 +30,10 @@ class Notification extends React.Component {
     }
 
     closeNotification = () => {
-        const { item } = this.props;
-        notification.destroy(item);
+        const { item, closeOnClick } = this.props;
+        if(closeOnClick){
+            notification.destroy(item);
+        }
     }
 
     render() {
@@ -61,7 +63,12 @@ Notification.PropTypes = {
     content: PropTypes.element,
     duration: PropTypes.number,
     onCreate: PropTypes.func,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    closeOnClick: PropTypes.bool
+}
+
+Notification.defaultProps = {
+    closeOnClick: true
 }
 
 export default Notification;

@@ -6,14 +6,15 @@ class notification extends EventEmitter {
         this.items = [];
     }
 
-    create( { className, title, content, duration, onCreate, onClose }) {
+    create( { className, title, content, duration, onCreate, onClose, closeOnClick }) {
         const notification = {
             className,
             title,
             content,
             duration,
             onCreate,
-            onClose
+            onClose,
+            closeOnClick
         };
 
         this.items.push(notification);
