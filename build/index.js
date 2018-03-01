@@ -752,12 +752,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Notification = function (_React$Component) {
     _inherits(Notification, _React$Component);
 
-    function Notification(props) {
+    function Notification() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, Notification);
 
-        var _this = _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.closeNotification = function () {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Notification.__proto__ || Object.getPrototypeOf(Notification)).call.apply(_ref, [this].concat(args))), _this), _this.closeNotification = function () {
             var _this$props = _this.props,
                 item = _this$props.item,
                 closeOnClick = _this$props.closeOnClick;
@@ -765,16 +771,20 @@ var Notification = function (_React$Component) {
             if (closeOnClick) {
                 _notification2.default.destroy(item);
             }
-        };
-
-        _this.state = {
-            showClass: ''
-        };
-        return _this;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Notification, [{
         key: 'componentWillMount',
+
+        // constructor(props) {
+        //     super(props);
+
+        //     this.state = {
+        //         showClass: ''
+        //     }
+        // }
+
         value: function componentWillMount() {
             var beforeCreate = this.props.beforeCreate;
 
@@ -789,7 +799,7 @@ var Notification = function (_React$Component) {
                 onCreate = _props.onCreate;
 
             if (onCreate) onCreate();
-            this.setState({ showClass: 'notification-show' });
+            // this.setState({ showClass: 'notification-show' });
 
             if (duration) setTimeout(function () {
                 return _notification2.default.destroy(item);
@@ -810,10 +820,11 @@ var Notification = function (_React$Component) {
                 title = _props2.title,
                 content = _props2.content,
                 duration = _props2.duration;
-            var showClass = this.state.showClass;
+            // const { showClass } = this.state;
 
-
-            var notificationClassName = _utils.arrays.join('notification', className, showClass);
+            var notificationClassName = _utils.arrays.join('notification', className
+            // showClass
+            );
 
             return _react2.default.createElement(
                 'div',
