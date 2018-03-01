@@ -81,6 +81,8 @@ Sets content, or the body of the notification. You can use your own style by usi
 
 #### `duration` | number
 Sets how long will notification be shown to the user. If duration is not set, notification will live until page is refreshed or `<NotificationsContainer />` is unmounted.
+#### `beforeCreate` | function
+Gives you ability to call your own callback when notification will be created.
 #### `onCreate` | function
 Gives you ability to call your own callback when notification was created.
 #### `onClose`  | function
