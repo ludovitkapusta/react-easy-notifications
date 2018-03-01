@@ -80,11 +80,11 @@ Sets title of the notification. You can use your own style by using `.notificati
 Sets content, or the body of the notification. You can use your own style by using `.notification-content` class.
 
 #### `duration` | number
-Sets how long will notification be shown to the user. Expects number. If duration is not set, notification will live until page is refreshed or `<NotificationsContainer />` is unmounted.
-#### `onCreate` | funciton
-Gives you ability to call your own callback when notification was created. Expects function.
-#### `onClose`  | funciton
-Gives you ability to call your own callback when notification was closed. Expects function.
+Sets how long will notification be shown to the user. If duration is not set, notification will live until page is refreshed or `<NotificationsContainer />` is unmounted.
+#### `onCreate` | function
+Gives you ability to call your own callback when notification was created.
+#### `onClose`  | function
+Gives you ability to call your own callback when notification was closed.
 #### `closeOnClick`: | bool
 Allow/disallow closing notification by clicking on the notification
 #### `target`: | string
