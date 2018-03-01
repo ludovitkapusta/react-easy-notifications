@@ -302,6 +302,7 @@ var notification = function (_EventEmitter) {
                 title = _ref2.title,
                 content = _ref2.content,
                 duration = _ref2.duration,
+                beforeCreate = _ref2.beforeCreate,
                 onCreate = _ref2.onCreate,
                 onClose = _ref2.onClose,
                 closeOnClick = _ref2.closeOnClick,
@@ -312,6 +313,7 @@ var notification = function (_EventEmitter) {
                 title: title,
                 content: content,
                 duration: duration,
+                beforeCreate: beforeCreate,
                 onCreate: onCreate,
                 onClose: onClose,
                 closeOnClick: closeOnClick,
@@ -691,6 +693,7 @@ var NotificationsContainer = function (_React$Component) {
                         title: item.title,
                         content: item.content,
                         duration: item.duration,
+                        beforeCreate: item.beforeCreate,
                         onCreate: item.onCreate,
                         onClose: item.onClose,
                         closeOnClick: item.closeOnClick
@@ -771,6 +774,13 @@ var Notification = function (_React$Component) {
     }
 
     _createClass(Notification, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var beforeCreate = this.props.beforeCreate;
+
+            if (beforeCreate) beforeCreate();
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var _props = this.props,
@@ -832,6 +842,7 @@ Notification.PropTypes = {
     title: _propTypes2.default.element,
     content: _propTypes2.default.element,
     duration: _propTypes2.default.number,
+    beforeCreate: _propTypes2.default.func,
     onCreate: _propTypes2.default.func,
     onClick: _propTypes2.default.func,
     closeOnClick: _propTypes2.default.bool

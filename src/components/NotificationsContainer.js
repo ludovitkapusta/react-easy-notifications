@@ -47,6 +47,7 @@ class NotificationsContainer extends React.Component {
                             title={ item.title }
                             content={ item.content }
                             duration={ item.duration }
+                            beforeCreate={ item.beforeCreate }
                             onCreate={ item.onCreate }
                             onClose={ item.onClose }
                             closeOnClick={ item.closeOnClick }

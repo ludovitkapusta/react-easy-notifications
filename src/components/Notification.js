@@ -12,6 +12,11 @@ class Notification extends React.Component {
         }
     }
 
+    componentWillMount() {
+        const { beforeCreate } = this.props;
+        if(beforeCreate) beforeCreate();
+    }
+
     componentDidMount() {
         const { item, duration, onCreate } = this.props;
         if(onCreate) onCreate();
@@ -62,6 +67,7 @@ Notification.PropTypes = {
     title: PropTypes.element,
     content: PropTypes.element,
     duration: PropTypes.number,
+    beforeCreate: PropTypes.func,
     onCreate: PropTypes.func,
     onClick: PropTypes.func,
     closeOnClick: PropTypes.bool
