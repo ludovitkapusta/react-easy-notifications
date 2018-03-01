@@ -1,10 +1,7 @@
 import { EventEmitter } from 'events';
 
 class notification extends EventEmitter {
-    constructor() {
-        super();
-        this.items = [];
-    }
+    items = [];
 
     create( { className, title, content, duration, onCreate, onClose, closeOnClick, target }) {
         const notification = {

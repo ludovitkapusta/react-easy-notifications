@@ -282,25 +282,30 @@ var notification = function (_EventEmitter) {
     _inherits(notification, _EventEmitter);
 
     function notification() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, notification);
 
-        var _this = _possibleConstructorReturn(this, (notification.__proto__ || Object.getPrototypeOf(notification)).call(this));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.items = [];
-        return _this;
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = notification.__proto__ || Object.getPrototypeOf(notification)).call.apply(_ref, [this].concat(args))), _this), _this.items = [], _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(notification, [{
         key: 'create',
-        value: function create(_ref) {
-            var className = _ref.className,
-                title = _ref.title,
-                content = _ref.content,
-                duration = _ref.duration,
-                onCreate = _ref.onCreate,
-                onClose = _ref.onClose,
-                closeOnClick = _ref.closeOnClick,
-                target = _ref.target;
+        value: function create(_ref2) {
+            var className = _ref2.className,
+                title = _ref2.title,
+                content = _ref2.content,
+                duration = _ref2.duration,
+                onCreate = _ref2.onCreate,
+                onClose = _ref2.onClose,
+                closeOnClick = _ref2.closeOnClick,
+                target = _ref2.target;
 
             var notification = {
                 className: className,
