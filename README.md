@@ -3,7 +3,7 @@ Simple react module for creating a notifications
 ## Instalation
 Install **React easy notifications** by using npm command
 ```
-//here will be npm command
+npm install react-easy-notifications
 ```
 
 Import `NotificationsContainer` and `notification` in your component class alongside React
