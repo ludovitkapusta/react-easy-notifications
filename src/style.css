@@ -1,32 +1,36 @@
-.notification-container {
+.notifications-container {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
 }
 
-.notification-container.top-left {
+.notification-is-hidden {
+  display: none;
+}
+
+.notifications-container.top-left {
   top: 0;
   bottom: auto;
   left: 0;
   right: auto;
 }
 
-.notification-container.top-right {
+.notifications-container.top-right {
   top: 0;
   bottom: auto;
   right: 0;
   left: auto;
 }
 
-.notification-container.bottom-left {
+.notifications-container.bottom-left {
   top: auto;
   bottom: 0;
   left: 0;
   right: auto;
 }
 
-.notification-container.bottom-right {
+.notifications-container.bottom-right {
   top: auto;
   bottom: 0;
   right: 0;

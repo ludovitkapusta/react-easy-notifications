@@ -4,40 +4,59 @@ import notification from '../notification';
 import { arrays } from '../utils';
 
 class Notification extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            eventClass: ''
+        }
+    }
+
     componentWillMount() {
         const { beforeCreate } = this.props;
+        this.setState({ eventClass: 'notification-will-display' });
+
         if(beforeCreate) beforeCreate();
     }
 
     componentDidMount() {
         const { item, duration, onCreate } = this.props;
+        this.setState({ eventClass: 'notification-is-displayed' });
+
         if(onCreate) onCreate();
 
-        if(duration)
-            setTimeout(
-                () => notification.destroy(item),
+        if(duration) {
+            const countdown = setTimeout(
+                () => {
+                    this.setState({ eventClass: 'notification-is-hidden' });
+                    // notification.destroy(item);
+                },
                 duration
             );
+        }
     }
 
     componentWillUnmount() {
-        const { onClose } = this.props;
+        const { onClose } = this.props;        
         if(onClose) onClose();
     }
 
     closeNotification = () => {
         const { item, closeOnClick } = this.props;
         if(closeOnClick){
-            notification.destroy(item);
+            this.setState({ eventClass: 'notification-is-hidden' });
+            // notification.destroy(item);
         }
     }
 
     render() {
         const { className, title, content, duration } = this.props;
+        const { eventClass } = this.state;
+        console.log(eventClass);
 
         const notificationClassName = arrays.join(
             'notification',
             className,
+            eventClass
         );
 
         return (

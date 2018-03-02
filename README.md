@@ -2,7 +2,7 @@
 Simple react module for creating a notifications
 ## Instalation
 Install **React easy notifications** by using npm command
-```
+```jsx
 npm install react-easy-notifications
 ```
 
@@ -22,7 +22,8 @@ notification.create({
   className: 'notification-success',
   duration: 3000,
   onCreate: () => this.onCreate(),
-  onClose: () => this.onClose()
+  onClose: () => this.onClose(),
+  target: 'target'
 });
 ```
 Example implementaion of **React Easy Notifications**
@@ -46,7 +47,7 @@ class App extends Component {
     return (
       <div>
         <button onClick={ this.createSuccessNotification }>success notification</button>
-        <NotificationsContainer position="top-left"/>
+        <NotificationsContainer position="top-left" name="target"/>
       </div>
     );
   }

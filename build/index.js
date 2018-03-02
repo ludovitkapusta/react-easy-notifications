@@ -679,7 +679,7 @@ var NotificationsContainer = function (_React$Component) {
                 position = _props.position;
 
 
-            var containerClasses = _utils.arrays.join('notification-container', className, position);
+            var containerClasses = _utils.arrays.join('notifications-container', className, position);
 
             return _react2.default.createElement(
                 'div',
@@ -752,26 +752,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Notification = function (_React$Component) {
     _inherits(Notification, _React$Component);
 
-    function Notification() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function Notification(props) {
         _classCallCheck(this, Notification);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (Notification.__proto__ || Object.getPrototypeOf(Notification)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Notification.__proto__ || Object.getPrototypeOf(Notification)).call.apply(_ref, [this].concat(args))), _this), _this.closeNotification = function () {
+        _this.closeNotification = function () {
             var _this$props = _this.props,
                 item = _this$props.item,
                 closeOnClick = _this$props.closeOnClick;
 
             if (closeOnClick) {
-                _notification2.default.destroy(item);
+                _this.setState({ eventClass: 'notification-is-hidden' });
+                // notification.destroy(item);
             }
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.state = {
+            eventClass: ''
+        };
+        return _this;
     }
 
     _createClass(Notification, [{
@@ -779,21 +779,30 @@ var Notification = function (_React$Component) {
         value: function componentWillMount() {
             var beforeCreate = this.props.beforeCreate;
 
+            this.setState({ eventClass: 'notification-will-display' });
+
             if (beforeCreate) beforeCreate();
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this2 = this;
+
             var _props = this.props,
                 item = _props.item,
                 duration = _props.duration,
                 onCreate = _props.onCreate;
 
+            this.setState({ eventClass: 'notification-is-displayed' });
+
             if (onCreate) onCreate();
 
-            if (duration) setTimeout(function () {
-                return _notification2.default.destroy(item);
-            }, duration);
+            if (duration) {
+                var countdown = setTimeout(function () {
+                    _this2.setState({ eventClass: 'notification-is-hidden' });
+                    // notification.destroy(item);
+                }, duration);
+            }
         }
     }, {
         key: 'componentWillUnmount',
@@ -810,9 +819,11 @@ var Notification = function (_React$Component) {
                 title = _props2.title,
                 content = _props2.content,
                 duration = _props2.duration;
+            var eventClass = this.state.eventClass;
 
+            console.log(eventClass);
 
-            var notificationClassName = _utils.arrays.join('notification', className);
+            var notificationClassName = _utils.arrays.join('notification', className, eventClass);
 
             return _react2.default.createElement(
                 'div',
@@ -934,7 +945,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, ".notification-container {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 9999;\n}\n\n.notification-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notification-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
+exports.push([module.i, ".notifications-container {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 9999;\n}\n\n.notification-is-hidden {\n  display: none;\n}\n\n.notifications-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notifications-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
 
 // exports
 

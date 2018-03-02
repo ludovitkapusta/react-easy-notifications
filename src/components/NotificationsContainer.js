@@ -30,7 +30,7 @@ class NotificationsContainer extends React.Component {
         const { className, name, position } = this.props;
 
         const containerClasses = arrays.join(
-            'notification-container',
+            'notifications-container',
             className,
             position
         );
