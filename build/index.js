@@ -776,15 +776,6 @@ var Notification = function (_React$Component) {
 
     _createClass(Notification, [{
         key: 'componentWillMount',
-
-        // constructor(props) {
-        //     super(props);
-
-        //     this.state = {
-        //         showClass: ''
-        //     }
-        // }
-
         value: function componentWillMount() {
             var beforeCreate = this.props.beforeCreate;
 
@@ -799,7 +790,6 @@ var Notification = function (_React$Component) {
                 onCreate = _props.onCreate;
 
             if (onCreate) onCreate();
-            // this.setState({ showClass: 'notification-show' });
 
             if (duration) setTimeout(function () {
                 return _notification2.default.destroy(item);
@@ -820,11 +810,9 @@ var Notification = function (_React$Component) {
                 title = _props2.title,
                 content = _props2.content,
                 duration = _props2.duration;
-            // const { showClass } = this.state;
 
-            var notificationClassName = _utils.arrays.join('notification', className
-            // showClass
-            );
+
+            var notificationClassName = _utils.arrays.join('notification', className);
 
             return _react2.default.createElement(
                 'div',
@@ -946,7 +934,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, ".notification-container {\n  font-family: sans-serif;\n  text-align: left;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.notification-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notification-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n\n@-webkit-keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }\n@keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }\n@-webkit-keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }\n@keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }\n\n.notification-container.top-left .notification-show {\n  -webkit-animation: fadeInLeft .3s;\n  animation: fadeInLeft .3s;\n  display: block;\n}\n\n.notification-container.top-right .notification-show {\n  -webkit-animation: fadeInRight .3s;\n  animation: fadeInRight .3s;\n  display: block;\n}\n\n.notification-container.bottom-left .notification-show {\n  -webkit-animation: fadeInLeft .3s;\n  animation: fadeInLeft .3s;\n  display: block;\n}\n\n.notification-container.bottom-right .notification-show {\n  -webkit-animation: fadeInRight .3s;\n  animation: fadeInRight .3s;\n  display: block;\n}\n\n.notification {\n  width: 400px;\n  padding: 20px;\n  margin-bottom: 10px;\n  color: #fff;\n  word-wrap: break-word;\n  box-shadow: 0px 4px 12px -5px #000;\n}\n\n.notification-success {\n  background: rgb(129, 230, 154);\n}\n\n.notification-warning {\n  background: rgb(243, 140, 140);\n}\n\n.notification-info {\n  background: rgb(142, 223, 255);\n}", ""]);
+exports.push([module.i, ".notification-container {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.notification-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notification-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notification-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
 
 // exports
 

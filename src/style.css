@@ -1,6 +1,4 @@
 .notification-container {
-  font-family: sans-serif;
-  text-align: left;
   position: absolute;
   top: 0;
   left: 0;
@@ -32,54 +30,4 @@
   bottom: 0;
   right: 0;
   left: auto;
-}
-
-@-webkit-keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }
-@keyframes fadeInRight { from { opacity: 0; margin-left: 100%; } to { opacity: 1; margin-left: 0; } }
-@-webkit-keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }
-@keyframes fadeInLeft { from { opacity: 0; margin-left: -100%; } to { opacity: 1; margin-left: 0; } }
-
-.notification-container.top-left .notification-show {
-  -webkit-animation: fadeInLeft .3s;
-  animation: fadeInLeft .3s;
-  display: block;
-}
-
-.notification-container.top-right .notification-show {
-  -webkit-animation: fadeInRight .3s;
-  animation: fadeInRight .3s;
-  display: block;
-}
-
-.notification-container.bottom-left .notification-show {
-  -webkit-animation: fadeInLeft .3s;
-  animation: fadeInLeft .3s;
-  display: block;
-}
-
-.notification-container.bottom-right .notification-show {
-  -webkit-animation: fadeInRight .3s;
-  animation: fadeInRight .3s;
-  display: block;
-}
-
-.notification {
-  width: 400px;
-  padding: 20px;
-  margin-bottom: 10px;
-  color: #fff;
-  word-wrap: break-word;
-  box-shadow: 0px 4px 12px -5px #000;
-}
-
-.notification-success {
-  background: rgb(129, 230, 154);
-}
-
-.notification-warning {
-  background: rgb(243, 140, 140);
-}
-
-.notification-info {
-  background: rgb(142, 223, 255);
 }
