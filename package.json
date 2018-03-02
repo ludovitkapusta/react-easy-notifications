@@ -1,6 +1,6 @@
 {
   "name": "react-easy-notifications",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple module for creating a notifications using React",
   "license": "MIT",
   "author": {
@@ -20,6 +20,7 @@
     "easy"
   ],
   "main": "build/index.js",
+  "module": "build/index.js",
   "peerDependencies": {
     "react": "^15.5.4"
   },
