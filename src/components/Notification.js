@@ -63,8 +63,12 @@ class Notification extends React.Component {
             <div
                 className={ notificationClassName }
                 onClick={ this.closeNotification } >
-                { title && <div className="notification-header">{ title }</div> }
-                { content && <div className="notification-content">{ content }</div> }
+                <div class="notication-column notication-column-left">left</div>
+                <div class="notication-column notication-column-center">
+                    { title && <div className="notification-header">{ title }</div> }
+                    { content && <div className="notification-content">{ content }</div> }
+                </div>
+                <div class="notication-column notication-column-right">right </div>
             </div>
         )
     };
