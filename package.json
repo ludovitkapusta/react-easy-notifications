@@ -1,26 +1,39 @@
 {
   "name": "react-easy-notifications",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Simple module for creating a notifications using React",
+  "license": "MIT",
+  "author": {
+    "name": "Ludovit Kapusta",
+    "email": "ludovit.kapusta@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escuriak/react-easy-notifications.git"
+  },
+  "keywords": [
+    "react",
+    "notification",
+    "notifications",
+    "react-notifications",
+    "ren",
+    "easy"
+  ],
   "main": "build/index.js",
   "peerDependencies": {
     "react": "^15.5.4"
   },
   "dependencies": {
-    "css-loader": "^0.28.9",
-    "prop-types": "^15.6.0",
     "react": "^15.5.4",
+    "prop-types": "^15.6.0",
     "style-loader": "^0.20.2",
+    "css-loader": "^0.28.10",
     "webpack": "^2.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
     "build": "webpack"
-  },
-  "author": {
-    "name": "Ludovit Kapusta",
-    "email": "ludovit.kapusta@gmail.com"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
