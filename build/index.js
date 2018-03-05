@@ -830,15 +830,29 @@ var Notification = function (_React$Component) {
                 {
                     className: notificationClassName,
                     onClick: this.closeNotification },
-                title && _react2.default.createElement(
+                _react2.default.createElement(
                     'div',
-                    { className: 'notification-header' },
-                    title
+                    { 'class': 'notication-column notication-column-left' },
+                    'left'
                 ),
-                content && _react2.default.createElement(
+                _react2.default.createElement(
                     'div',
-                    { className: 'notification-content' },
-                    content
+                    { 'class': 'notication-column notication-column-center' },
+                    title && _react2.default.createElement(
+                        'div',
+                        { className: 'notification-header' },
+                        title
+                    ),
+                    content && _react2.default.createElement(
+                        'div',
+                        { className: 'notification-content' },
+                        content
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { 'class': 'notication-column notication-column-right' },
+                    'right '
                 )
             );
         }
@@ -945,7 +959,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, ".notifications-container {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 9999;\n}\n\n.notification-is-hidden {\n  display: none;\n}\n\n.notifications-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notifications-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
+exports.push([module.i, ".notifications-container {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 9999;\n}\n\n.notification {\n  clear: both;\n  overflow: auto;\n}\n\n.notication-column {\n  float: left;\n}\n\n.notification-is-hidden {\n  display: none;\n}\n\n.notifications-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notifications-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
 
 // exports
 
