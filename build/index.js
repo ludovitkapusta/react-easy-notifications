@@ -769,7 +769,6 @@ var Notification = function (_React$Component) {
                 closeOnClick = _this$props.closeOnClick;
 
             if (closeOnClick) {
-                _this.setState({ eventClass: 'notification-is-hidden' });
                 _notification2.default.destroy(item);
             }
         };
@@ -792,8 +791,6 @@ var Notification = function (_React$Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this2 = this;
-
             var _props = this.props,
                 item = _props.item,
                 duration = _props.duration,
@@ -805,7 +802,6 @@ var Notification = function (_React$Component) {
 
             if (duration) {
                 var countdown = setTimeout(function () {
-                    _this2.setState({ eventClass: 'notification-is-hidden' });
                     _notification2.default.destroy(item);
                 }, duration);
             }

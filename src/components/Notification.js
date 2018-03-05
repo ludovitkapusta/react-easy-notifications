@@ -27,7 +27,6 @@ class Notification extends React.Component {
         if(duration) {
             const countdown = setTimeout(
                 () => {
-                    this.setState({ eventClass: 'notification-is-hidden' });
                     notification.destroy(item);
                 },
                 duration
@@ -43,7 +42,6 @@ class Notification extends React.Component {
     closeNotification = () => {
         const { item, closeOnClick } = this.props;
         if(closeOnClick){
-            this.setState({ eventClass: 'notification-is-hidden' });
             notification.destroy(item);
         }
     }
