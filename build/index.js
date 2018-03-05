@@ -839,12 +839,12 @@ var Notification = function (_React$Component) {
                     onClick: this.closeNotification },
                 _react2.default.createElement(
                     'div',
-                    { className: 'notication-column notication-column-left' },
+                    { className: 'notification-column notification-column-left' },
                     contentLeft
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'notication-column notication-column-center' },
+                    { className: 'notification-column notification-column-center' },
                     title && _react2.default.createElement(
                         'div',
                         { className: 'notification-header' },
@@ -858,7 +858,7 @@ var Notification = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'notication-column notication-column-right' },
+                    { className: 'notification-column notification-column-right' },
                     contentRight
                 )
             );
