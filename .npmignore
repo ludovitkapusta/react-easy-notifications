@@ -1,0 +1,6 @@
+# Sources
+src
+
+# Configurations
+.babelrc
+webpack*
