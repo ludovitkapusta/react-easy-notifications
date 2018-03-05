@@ -6,16 +6,11 @@
 }
 
 .notification {
-  clear: both;
-  overflow: auto;
+  display: flex;
 }
 
-.notification-column {
-  float: left;
-}
-
-.notification-is-hidden {
-  display: none;
+.notification-column-center {
+  flex-grow: 1;
 }
 
 .notifications-container.top-left {
