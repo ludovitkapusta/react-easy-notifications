@@ -5,15 +5,6 @@
   z-index: 9999;
 }
 
-.notification {
-  clear: both;
-  overflow: auto;
-}
-
-.notication-column {
-  float: left;
-}
-
 .notification-is-hidden {
   display: none;
 }
