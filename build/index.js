@@ -301,6 +301,8 @@ var notification = function (_EventEmitter) {
             var className = _ref2.className,
                 title = _ref2.title,
                 content = _ref2.content,
+                contentLeft = _ref2.contentLeft,
+                contentRight = _ref2.contentRight,
                 duration = _ref2.duration,
                 beforeCreate = _ref2.beforeCreate,
                 onCreate = _ref2.onCreate,
@@ -312,6 +314,8 @@ var notification = function (_EventEmitter) {
                 className: className,
                 title: title,
                 content: content,
+                contentLeft: contentLeft,
+                contentRight: contentRight,
                 duration: duration,
                 beforeCreate: beforeCreate,
                 onCreate: onCreate,
@@ -692,6 +696,8 @@ var NotificationsContainer = function (_React$Component) {
                         className: item.className,
                         title: item.title,
                         content: item.content,
+                        contentLeft: item.contentLeft,
+                        contentRight: item.contentRight,
                         duration: item.duration,
                         beforeCreate: item.beforeCreate,
                         onCreate: item.onCreate,
@@ -818,6 +824,8 @@ var Notification = function (_React$Component) {
                 className = _props2.className,
                 title = _props2.title,
                 content = _props2.content,
+                contentLeft = _props2.contentLeft,
+                contentRight = _props2.contentRight,
                 duration = _props2.duration;
             var eventClass = this.state.eventClass;
 
@@ -833,7 +841,7 @@ var Notification = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { 'class': 'notication-column notication-column-left' },
-                    'left'
+                    contentLeft
                 ),
                 _react2.default.createElement(
                     'div',
@@ -852,7 +860,7 @@ var Notification = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { 'class': 'notication-column notication-column-right' },
-                    'right '
+                    contentRight
                 )
             );
         }
@@ -865,6 +873,8 @@ Notification.PropTypes = {
     className: _propTypes2.default.string,
     title: _propTypes2.default.element,
     content: _propTypes2.default.element,
+    contentLeft: _propTypes2.default.element,
+    contentRight: _propTypes2.default.element,
     duration: _propTypes2.default.number,
     beforeCreate: _propTypes2.default.func,
     onCreate: _propTypes2.default.func,
