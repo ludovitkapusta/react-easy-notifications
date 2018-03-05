@@ -829,7 +829,6 @@ var Notification = function (_React$Component) {
                 duration = _props2.duration;
             var eventClass = this.state.eventClass;
 
-            console.log(eventClass);
 
             var notificationClassName = _utils.arrays.join('notification', className, eventClass);
 
@@ -840,12 +839,12 @@ var Notification = function (_React$Component) {
                     onClick: this.closeNotification },
                 _react2.default.createElement(
                     'div',
-                    { 'class': 'notication-column notication-column-left' },
+                    { className: 'notication-column notication-column-left' },
                     contentLeft
                 ),
                 _react2.default.createElement(
                     'div',
-                    { 'class': 'notication-column notication-column-center' },
+                    { className: 'notication-column notication-column-center' },
                     title && _react2.default.createElement(
                         'div',
                         { className: 'notification-header' },
@@ -859,7 +858,7 @@ var Notification = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { 'class': 'notication-column notication-column-right' },
+                    { className: 'notication-column notication-column-right' },
                     contentRight
                 )
             );

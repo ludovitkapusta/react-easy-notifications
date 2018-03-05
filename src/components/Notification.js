@@ -51,7 +51,6 @@ class Notification extends React.Component {
     render() {
         const { className, title, content, contentLeft, contentRight, duration } = this.props;
         const { eventClass } = this.state;
-        console.log(eventClass);
 
         const notificationClassName = arrays.join(
             'notification',
@@ -63,14 +62,14 @@ class Notification extends React.Component {
             <div
                 className={ notificationClassName }
                 onClick={ this.closeNotification } >
-                <div class="notication-column notication-column-left">
+                <div className="notication-column notication-column-left">
                     { contentLeft }
                 </div>
-                <div class="notication-column notication-column-center">
+                <div className="notication-column notication-column-center">
                     { title && <div className="notification-header">{ title }</div> }
                     { content && <div className="notification-content">{ content }</div> }
                 </div>
-                <div class="notication-column notication-column-right">
+                <div className="notication-column notication-column-right">
                     { contentRight }
                 </div>
             </div>
