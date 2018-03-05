@@ -1,5 +1,5 @@
 var path = require('path');
-
+var BabelMinifyPlugin = require('babel-minify-webpack-plugin');
 var APP_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
@@ -32,6 +32,15 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new BabelMinifyPlugin({
+          removeDebugger: true,
+          removeConsole: true,
+          mangle: {
+            topLevel: true,
+          }
+        })
+      ].filter(Boolean),
     externals: {
         'react': 'commonjs react' // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
     }
