@@ -43,7 +43,8 @@ class App extends Component {
       contentRight: 'Right Col',
       duration: 3000,
       onCreate: () => this.onCreate(),
-      onClose: () => this.onClose()
+      onClose: () => this.onClose(),
+      target: 'target'
     });
   }
 
