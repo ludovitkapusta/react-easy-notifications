@@ -770,7 +770,7 @@ var Notification = function (_React$Component) {
 
             if (closeOnClick) {
                 _this.setState({ eventClass: 'notification-is-hidden' });
-                // notification.destroy(item);
+                _notification2.default.destroy(item);
             }
         };
 
@@ -806,7 +806,7 @@ var Notification = function (_React$Component) {
             if (duration) {
                 var countdown = setTimeout(function () {
                     _this2.setState({ eventClass: 'notification-is-hidden' });
-                    // notification.destroy(item);
+                    _notification2.default.destroy(item);
                 }, duration);
             }
         }
@@ -968,7 +968,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, ".notifications-container {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 9999;\n}\n\n.notification {\n  clear: both;\n  overflow: auto;\n}\n\n.notication-column {\n  float: left;\n}\n\n.notification-is-hidden {\n  display: none;\n}\n\n.notifications-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notifications-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
+exports.push([module.i, ".notifications-container {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 9999;\n}\n\n.notification {\n  clear: both;\n  overflow: auto;\n}\n\n.notification-column {\n  float: left;\n}\n\n.notification-is-hidden {\n  display: none;\n}\n\n.notifications-container.top-left {\n  top: 0;\n  bottom: auto;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.top-right {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n}\n\n.notifications-container.bottom-left {\n  top: auto;\n  bottom: 0;\n  left: 0;\n  right: auto;\n}\n\n.notifications-container.bottom-right {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  left: auto;\n}\n", ""]);
 
 // exports
 
