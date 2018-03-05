@@ -893,20 +893,20 @@ exports.default = Notification;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotificationsContainer = exports.notification = undefined;
+exports.notification = exports.NotificationsContainer = undefined;
 
-var _NotificationsContainer = __webpack_require__(9);
+var _NotificationsContainer2 = __webpack_require__(9);
 
-var _NotificationsContainer2 = _interopRequireDefault(_NotificationsContainer);
+var _NotificationsContainer3 = _interopRequireDefault(_NotificationsContainer2);
 
-var _notification = __webpack_require__(1);
+var _notification2 = __webpack_require__(1);
 
-var _notification2 = _interopRequireDefault(_notification);
+var _notification3 = _interopRequireDefault(_notification2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.notification = _notification2.default;
-exports.NotificationsContainer = _NotificationsContainer2.default;
+exports.NotificationsContainer = _NotificationsContainer3.default;
+exports.notification = _notification3.default;
 
 /***/ }),
 /* 12 */

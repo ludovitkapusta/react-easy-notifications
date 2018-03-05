@@ -1,4 +1,2 @@
-import NotificationsContainer from './components/NotificationsContainer';
-import notification from './notification';
-
-export { notification, NotificationsContainer };
+export NotificationsContainer from './components/NotificationsContainer';
+export notification from './notification';
