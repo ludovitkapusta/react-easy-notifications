@@ -1,6 +1,8 @@
 import { EventEmitter } from 'events';
 
-class notification extends EventEmitter {
+const eventEmitter = new EventEmitter();
+
+class notification {
     items = [];
 
     create( { className, title, content, contentLeft, contentRight, duration, beforeCreate, onCreate, onClose, closeOnClick, target }) {
@@ -17,9 +19,10 @@ class notification extends EventEmitter {
             closeOnClick,
             target
         };
+        
 
         this.items.push(notification);
-        this.emit('change', this.items);
+        eventEmitter.emit('change', this.items);
     };
 
     destroy(item) {
@@ -28,16 +31,16 @@ class notification extends EventEmitter {
         if(index > -1) {
             newItems.splice(index, 1);
             this.items = newItems;
-            this.emit('change', this.items);	
+            eventEmitter.emit('change', this.items);	
         }
     }
 
     addChangeListener(callback) {
-        this.addListener('change', callback);
+        eventEmitter.addListener('change', callback);
     }
     
     removeChangeListener(callback) {
-        this.removeListener('change', callback);
+        eventEmitter.removeListener('change', callback);
     }
 }
 

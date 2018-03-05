@@ -274,41 +274,29 @@ var _events = __webpack_require__(15);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var eventEmitter = new _events.EventEmitter();
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var notification = function (_EventEmitter) {
-    _inherits(notification, _EventEmitter);
-
+var notification = function () {
     function notification() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, notification);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = notification.__proto__ || Object.getPrototypeOf(notification)).call.apply(_ref, [this].concat(args))), _this), _this.items = [], _temp), _possibleConstructorReturn(_this, _ret);
+        this.items = [];
     }
 
     _createClass(notification, [{
         key: 'create',
-        value: function create(_ref2) {
-            var className = _ref2.className,
-                title = _ref2.title,
-                content = _ref2.content,
-                contentLeft = _ref2.contentLeft,
-                contentRight = _ref2.contentRight,
-                duration = _ref2.duration,
-                beforeCreate = _ref2.beforeCreate,
-                onCreate = _ref2.onCreate,
-                onClose = _ref2.onClose,
-                closeOnClick = _ref2.closeOnClick,
-                target = _ref2.target;
+        value: function create(_ref) {
+            var className = _ref.className,
+                title = _ref.title,
+                content = _ref.content,
+                contentLeft = _ref.contentLeft,
+                contentRight = _ref.contentRight,
+                duration = _ref.duration,
+                beforeCreate = _ref.beforeCreate,
+                onCreate = _ref.onCreate,
+                onClose = _ref.onClose,
+                closeOnClick = _ref.closeOnClick,
+                target = _ref.target;
 
             var notification = {
                 className: className,
@@ -325,7 +313,7 @@ var notification = function (_EventEmitter) {
             };
 
             this.items.push(notification);
-            this.emit('change', this.items);
+            eventEmitter.emit('change', this.items);
         }
     }, {
         key: 'destroy',
@@ -335,23 +323,23 @@ var notification = function (_EventEmitter) {
             if (index > -1) {
                 newItems.splice(index, 1);
                 this.items = newItems;
-                this.emit('change', this.items);
+                eventEmitter.emit('change', this.items);
             }
         }
     }, {
         key: 'addChangeListener',
         value: function addChangeListener(callback) {
-            this.addListener('change', callback);
+            eventEmitter.addListener('change', callback);
         }
     }, {
         key: 'removeChangeListener',
         value: function removeChangeListener(callback) {
-            this.removeListener('change', callback);
+            eventEmitter.removeListener('change', callback);
         }
     }]);
 
     return notification;
-}(_events.EventEmitter);
+}();
 
 exports.default = new notification();
 
