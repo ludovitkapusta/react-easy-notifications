@@ -100,6 +100,6 @@ Gives you ability to call your own callback when notification was created.
 #### `onClose`  | function
 Gives you ability to call your own callback when notification was closed.
 #### `closeOnClick`: | bool
-Allow/disallow closing notification by clicking on the notification
+Allow/disallow closing notification by clicking on the notification. Allowed by default.
 #### `target`: | string
 Sets targeted `<NotificaitonController />`
