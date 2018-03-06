@@ -21,5 +21,5 @@ export default {
 
     trim(array) {
         return array.filter(Boolean);
-    },
+    }
 };

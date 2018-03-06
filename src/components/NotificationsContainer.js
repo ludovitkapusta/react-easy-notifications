@@ -38,9 +38,7 @@ class NotificationsContainer extends React.Component {
         return (
             <div className={ containerClasses }>
                 { items.map((item, index) => {
-                    if(item.target !== '') {
-                        if(item.target !== name) return null;
-                    }
+                    if(item.target !== '' && item.target !== name) return null;
                     return (
                         <Notification 
                             key={ index }

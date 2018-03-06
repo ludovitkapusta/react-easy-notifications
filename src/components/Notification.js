@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import notification from '../notification';
-import { arrays } from '../utils';
+import { arrays, timer } from '../utils';
 
 class Notification extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventClass: ''
+            eventClass: '',
+            timeout: null
         }
     }
 
@@ -20,22 +21,17 @@ class Notification extends React.Component {
 
     componentDidMount() {
         const { item, duration, onCreate } = this.props;
+
         this.setState({ eventClass: 'notification-is-displayed' });
-
+        
         if(onCreate) onCreate();
-
-        if(duration) {
-            const countdown = setTimeout(
-                () => {
-                    notification.destroy(item);
-                },
-                duration
-            );
-        }
+        
+        const timeout = timer.start(item, duration);
+        this.setState({ timeout });
     }
 
     componentWillUnmount() {
-        const { onClose } = this.props;        
+        const { onClose } = this.props;
         if(onClose) onClose();
     }
 
@@ -44,6 +40,19 @@ class Notification extends React.Component {
         if(closeOnClick){
             notification.destroy(item);
         }
+    }
+
+    onMouseEnter = () => {
+        const { timeout } = this.state;
+        timer.pause(timeout);
+    }
+
+    onMouseLeave = () => {
+        const { item, duration, onCreate } = this.props;
+        const { timeout } = this.state;
+
+        const newTimer = timer.start(item, duration);
+        this.setState({ timeout: newTimer });
     }
 
     render() {
@@ -59,7 +68,9 @@ class Notification extends React.Component {
         return (
             <div
                 className={ notificationClassName }
-                onClick={ this.closeNotification } >
+                onClick={ this.closeNotification }
+                onMouseEnter={ this.onMouseEnter }
+                onMouseLeave={ this.onMouseLeave } >
                 { title && <div className="notification-header">{ title }</div> }
                 { content && <div className="notification-content">{ content }</div> }
             </div>
