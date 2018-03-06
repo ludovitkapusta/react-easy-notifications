@@ -5,13 +5,11 @@ const eventEmitter = new EventEmitter();
 class notification {
     items = [];
 
-    create( { className, title, content, contentLeft, contentRight, duration, beforeCreate, onCreate, onClose, closeOnClick, target }) {
+    create( { className, title, content, duration, beforeCreate, onCreate, onClose, closeOnClick, target }) {
         const notification = {
             className,
             title,
             content,
-            contentLeft,
-            contentRight,
             duration,
             beforeCreate,
             onCreate,

@@ -47,7 +47,7 @@ class Notification extends React.Component {
     }
 
     render() {
-        const { className, title, content, contentLeft, contentRight, duration } = this.props;
+        const { className, title, content, duration } = this.props;
         const { eventClass } = this.state;
 
         const notificationClassName = arrays.join(
@@ -60,16 +60,8 @@ class Notification extends React.Component {
             <div
                 className={ notificationClassName }
                 onClick={ this.closeNotification } >
-                <div className="notification-column notification-column-left">
-                    { contentLeft }
-                </div>
-                <div className="notification-column notification-column-center">
-                    { title && <div className="notification-header">{ title }</div> }
-                    { content && <div className="notification-content">{ content }</div> }
-                </div>
-                <div className="notification-column notification-column-right">
-                    { contentRight }
-                </div>
+                { title && <div className="notification-header">{ title }</div> }
+                { content && <div className="notification-content">{ content }</div> }
             </div>
         )
     };
@@ -79,8 +71,6 @@ Notification.PropTypes = {
     className: PropTypes.string,
     title: PropTypes.element,
     content: PropTypes.element,
-    contentLeft: PropTypes.element,
-    contentRight: PropTypes.element,
     duration: PropTypes.number,
     beforeCreate: PropTypes.func,
     onCreate: PropTypes.func,

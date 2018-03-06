@@ -22,8 +22,6 @@ Example for creating a notification with supported properties
 notification.create({
   title: 'Success!',
   content: 'Your action was successfull',
-  contentLeft: 'Left Col',
-  contentRight: 'Right Col',
   className: 'notification-success',
   duration: 3000,
   onCreate: () => this.onCreate(),
@@ -42,8 +40,6 @@ class App extends Component {
     notification.create({
       title: 'Success!',
       content: 'Your action was successfull',
-      contentLeft: 'Left Col',
-      contentRight: 'Right Col',
       duration: 3000,
       onCreate: () => this.onCreate(),
       onClose: () => this.onClose(),
@@ -87,10 +83,6 @@ Sets the name of container. Byt this name, notification can be targeted for name
 Sets title of the notification. You can use your own style by using `.notification-header` class.
 #### `content` | string
 Sets content, or the body of the notification. You can use your own style by using `.notification-content` class and `notication-column-center` container class.
-#### `contentLeft` | string
-Sets content, or the body of the notification. You can use your own style by using `notication-column-center` container class.
-#### `contentRight` | string
-Sets content, or the body of the notification. You can use your own style by using `notication-column-center` container class.
 #### `duration` | number
 Sets how long will notification be shown to the user. If duration is not set, notification will live until page is refreshed or `<NotificationsContainer />` is unmounted.
 #### `beforeCreate` | function
@@ -102,4 +94,8 @@ Gives you ability to call your own callback when notification was closed.
 #### `closeOnClick`: | bool
 Allow/disallow closing notification by clicking on the notification. Allowed by default.
 #### `target`: | string
-Sets the name of targeted `<NotificaitonController />`
+Sets the name of targeted `<NotificaitonController />`.
+
+## Release notes
+#### 0.1.12
+* removed `contentLeft` and `contentRight` properties to give developer more space for their own designs

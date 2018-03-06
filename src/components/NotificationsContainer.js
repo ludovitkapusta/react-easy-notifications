@@ -38,7 +38,9 @@ class NotificationsContainer extends React.Component {
         return (
             <div className={ containerClasses }>
                 { items.map((item, index) => {
-                    if(item.target !== name) return null;
+                    if(item.target !== '') {
+                        if(item.target !== name) return null;
+                    }
                     return (
                         <Notification 
                             key={ index }
@@ -46,8 +48,6 @@ class NotificationsContainer extends React.Component {
                             className={ item.className }
                             title={ item.title }
                             content={ item.content }
-                            contentLeft={ item.contentLeft }
-                            contentRight={ item.contentRight }
                             duration={ item.duration }
                             beforeCreate={ item.beforeCreate }
                             onCreate={ item.onCreate }
@@ -62,7 +62,9 @@ class NotificationsContainer extends React.Component {
 };
 
 NotificationsContainer.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    name: PropTypes.string,
+    position: PropTypes.string.isRequired
 };
 
 export default NotificationsContainer;
