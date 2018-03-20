@@ -97,5 +97,7 @@ Allow/disallow closing notification by clicking on the notification. Allowed by 
 Sets the name of targeted `<NotificaitonController />`.
 
 ## Release notes
+#### 0.1.14
+* added pause duration on hover
 #### 0.1.12
 * removed `contentLeft` and `contentRight` properties to give developer more space for their own designs
