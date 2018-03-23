@@ -17,6 +17,8 @@ import { NotificationsContainer, notification } from 'react-easy-notifications';
 
 ## Examples
 
+[Demo](https://codesandbox.io/s/zwjyjyzkqp)
+
 Example for creating a notification with supported properties
 ```jsx
 notification.create({
