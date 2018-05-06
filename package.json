@@ -1,6 +1,6 @@
 {
   "name": "react-easy-notifications",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Simple module for creating a notifications using React",
   "license": "MIT",
   "author": {
@@ -27,7 +27,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
