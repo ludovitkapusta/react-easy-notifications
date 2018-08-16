@@ -1,25 +1,25 @@
 export default {
-    merge(...arrays) {
-        let merged = [];
+  merge(...arrays) {
+    let merged = [];
 
-        arrays.map((array) => {
-            !(Array.isArray(array)) && (array = [array]);
-            merged.push(...array);
-        });
+    arrays.map((array) => {
+      !(Array.isArray(array)) && (array = [array]);
+      merged.push(...array);
+    });
 
-        merged = this.trim(merged);
-        merged = this.unique(merged);
+    merged = this.trim(merged);
+    merged = this.unique(merged);
 
-        return merged;
-    },
+    return merged;
+  },
 
-    join(...arrays) {
-        return this.merge(...arrays).join(' ');
-    },
+  join(...arrays) {
+    return this.merge(...arrays).join(' ');
+  },
 
-    unique: array => Array.from(new Set(array)),
+  unique: array => Array.from(new Set(array)),
 
-    trim(array) {
-        return array.filter(Boolean);
-    }
+  trim(array) {
+    return array.filter(Boolean);
+  }
 };

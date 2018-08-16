@@ -40,3 +40,6 @@
   right: 0;
   left: auto;
 }
+.notifications-container.relative {
+  position: relative;
+}
