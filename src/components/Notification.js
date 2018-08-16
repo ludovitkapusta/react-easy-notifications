@@ -11,30 +11,24 @@ class Notification extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventClass: '',
+      eventClass: 'notification-will-display',
       timeout: null
     }
   }
 
-  componentWillMount() {
-    const { beforeCreate } = this.props;
-    this.setState({ eventClass: 'notification-will-display' });
-
-    if(beforeCreate) beforeCreate();
-  }
-
-  componentDidMount() {
-    const { item, duration, onCreate } = this.props;
+  componentDidMount = () => {
+    const { beforeCreate, duration, item, onCreate } = this.props;
 
     this.setState({ eventClass: 'notification-is-displayed' });
     
+    if(beforeCreate) beforeCreate();
     if(onCreate) onCreate();
     
     const timeout = timer.start(item, duration);
     this.setState({ timeout });
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     const { onClose } = this.props;
     if(onClose) onClose();
   }
@@ -84,7 +78,7 @@ class Notification extends React.Component {
 
 Notification.propTypes = {
   className: PropTypes.string,
-  title: PropTypes.element,
+  title: PropTypes.string,
   content: PropTypes.element,
   duration: PropTypes.number,
   beforeCreate: PropTypes.func,
