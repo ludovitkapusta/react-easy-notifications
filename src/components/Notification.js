@@ -4,6 +4,10 @@ import notification from '../notification';
 import { arrays, timer } from '../utils';
 
 class Notification extends React.Component {
+  static defaultProps = {
+    closeOnClick: true
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -78,7 +82,7 @@ class Notification extends React.Component {
   };
 }
 
-Notification.PropTypes = {
+Notification.propTypes = {
   className: PropTypes.string,
   title: PropTypes.element,
   content: PropTypes.element,
@@ -87,10 +91,6 @@ Notification.PropTypes = {
   onCreate: PropTypes.func,
   onClick: PropTypes.func,
   closeOnClick: PropTypes.bool
-}
-
-Notification.defaultProps = {
-  closeOnClick: true
 }
 
 export default Notification;

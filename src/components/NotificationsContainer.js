@@ -63,7 +63,7 @@ class NotificationsContainer extends React.Component {
 NotificationsContainer.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
-  position: PropTypes.string.isRequired
+  position: PropTypes.string
 };
 
 export default NotificationsContainer;
